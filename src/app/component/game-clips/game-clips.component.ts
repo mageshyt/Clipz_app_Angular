@@ -34,7 +34,7 @@ export class GameClipsComponent implements OnInit {
     {
       gameTitle: 'Fortnite :Global Offensive',
       UploadedDate: '1-12-2022',
-      postedBY: 'chani yt  🚌',
+      postedBY: 'chan yt  🚌',
       gameImage:
         'https://cdn2.unrealengine.com/metaimage1-1920x1080-abb60090deaf.png',
     },
