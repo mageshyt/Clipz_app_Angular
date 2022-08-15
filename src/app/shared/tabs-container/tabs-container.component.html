@@ -1,13 +1,18 @@
 <!-- login and register btn -->
 <div class="flex flow-row space-x-5 flex-1 justify-around px-3 py-4">
-  <button class="bg-indigo-400 w-[200px] h-[50px] py-3 px-4">
-    <a href="login.html">Login</a>
-  </button>
-  <!-- Register -->
-  <button
-    class="border-indigo-400 hover:border-2 transform hover:text-indigo-300 h-[50px] py-3 px-4 w-[200px]"
-  >
-    <a href="register.html">Register</a>
-  </button>
+  <div *ngFor="let tab of tabs">
+    <button
+      class="py-3 w-[200px] h-[50px] px-4"
+      (click)="selectTab(tab)"
+      [class.bg-indigo-400]="tab.active"
+      [ngClass]="{
+        ' hover:bg-indigo-400 transform transition-all duration-200 ':
+          !tab.active
+      }"
+    >
+      {{ tab?.tabTitle }}
+    </button>
+  </div>
 </div>
+
 <ng-content></ng-content>

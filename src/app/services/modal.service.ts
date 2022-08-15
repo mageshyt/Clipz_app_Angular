@@ -12,7 +12,7 @@ export class ModalService {
   private modals: IModal[] = [];
   registerModal(id: string) {
     this.modals.push({
-      isOpen: true,
+      isOpen: false,
       id,
     });
   }
