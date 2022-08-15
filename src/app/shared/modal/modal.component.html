@@ -1,0 +1,18 @@
+<div
+  class="z-50 inset-0 fixed bg-[#161d31] bg-opacity-70 scrollbar-hide"
+  [ngClass]="{ hidden: !isOpen }"
+>
+  <div class="flex items-center justify-center h-full">
+    <!-- Modal -->
+    <div class="bg-[#283046] pb-6 rounded-md w-[380px] sm:w-[470px]">
+      <!-- top session your account -->
+      <div class="p-4 flex items-center flex-row justify-between">
+        <ng-content select="[heading]"> </ng-content>
+
+        <span (click)="close()" class="font-bold cursor-pointer">&#x2715;</span>
+      </div>
+      <!-- Modal body -->
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>

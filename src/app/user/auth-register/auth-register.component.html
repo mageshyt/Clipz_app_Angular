@@ -1,0 +1,45 @@
+<form class="px-4">
+  <!-- name -->
+  <app-auth-custom-input
+    label="Name"
+    type="text"
+    placeholder="Name"
+    pattern="[a-zA-Z]*"
+  ></app-auth-custom-input>
+  <!-- email -->
+  <app-auth-custom-input
+    label="Email"
+    type="email"
+    placeholder="Email"
+    pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+  ></app-auth-custom-input>
+  <!-- password -->
+  <app-auth-custom-input
+    label="Password"
+    type="password"
+    placeholder="Password"
+    pattern="[a-zA-Z0-9]*"
+  ></app-auth-custom-input>
+  <!-- confirm password -->
+  <app-auth-custom-input
+    label="Confirm Password"
+    type="password"
+    placeholder="Confirm Password"
+    pattern="[a-zA-Z0-9]*"
+  ></app-auth-custom-input>
+
+  <!-- Phone number -->
+  <app-auth-custom-input
+    label="Phone Number"
+    type="tel"
+    placeholder="Phone Number"
+    pattern="[0-9]*"
+  ></app-auth-custom-input>
+  <!-- submit -->
+  <button
+    type="submit"
+    class="mt-4 w-full border border-indigo-400 p-2 transition-all transform duration-200 hover:bg-indigo-400"
+  >
+    submit
+  </button>
+</form>
