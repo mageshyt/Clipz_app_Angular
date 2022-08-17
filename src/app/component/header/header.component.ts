@@ -11,6 +11,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {}
   showAuthModal() {
+    console.log('showAuthModal');
     this.modal.toggleModal('auth');
   }
 }

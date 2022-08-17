@@ -1,10 +1,12 @@
-<form class="px-4">
+<form class="px-4" [formGroup]="registerForm" (submit)="onSubmit()">
   <!-- name -->
   <app-auth-custom-input
     label="Name"
     type="text"
-    placeholder="Name"
+    placeholder="Enter Name"
     pattern="[a-zA-Z]*"
+    [controller]="this.name"
+    minlength="4"
   ></app-auth-custom-input>
   <!-- email -->
   <app-auth-custom-input
@@ -22,9 +24,9 @@
   ></app-auth-custom-input>
   <!-- confirm password -->
   <app-auth-custom-input
-    label="Confirm Password"
     type="password"
-    placeholder="Confirm Password"
+    label="Confirm Password"
+    placeholder="confirmPassword"
     pattern="[a-zA-Z0-9]*"
   ></app-auth-custom-input>
 
