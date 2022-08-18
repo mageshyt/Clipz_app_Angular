@@ -21,6 +21,7 @@
     type="password"
     placeholder="Password"
     pattern="[a-zA-Z0-9]*"
+    [controller]="password"
   ></app-auth-custom-input>
   <!-- confirm password -->
   <app-auth-custom-input
@@ -28,6 +29,16 @@
     label="Confirm Password"
     placeholder="confirmPassword"
     pattern="[a-zA-Z0-9]*"
+    [controller]="confirmPassword"
+  ></app-auth-custom-input>
+  <!-- Age -->
+
+  <app-auth-custom-input
+    label="Age"
+    type="number"
+    placeholder="Age"
+    pattern="[0-9]*"
+    [controller]="age"
   ></app-auth-custom-input>
 
   <!-- Phone number -->

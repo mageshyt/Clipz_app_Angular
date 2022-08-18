@@ -7,15 +7,17 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./auth-register.component.scss'],
 })
 export class AuthRegisterComponent {
-  email = new FormControl('');
+  email = new FormControl('', [Validators.required, Validators.email]);
   password = new FormControl('');
   confirmPassword = new FormControl('');
-  name = new FormControl('', [Validators.required, Validators.maxLength(20)]);
+  name = new FormControl('', [Validators.required, Validators.minLength(4)]);
+  age = new FormControl('', [Validators.required, Validators.min(18)]);
   registerForm: any = new FormGroup({
     email: this.email,
     password: this.password,
     confirmPassword: this.confirmPassword,
     name: this.name,
+    age: this.age,
   });
 
   constructor() {}

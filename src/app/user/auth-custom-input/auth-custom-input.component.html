@@ -8,28 +8,32 @@
     placeholder="{{ placeholder }}"
     pattern="{{ pattern }}"
     required
-[formControl]="controller"
+    [formControl]="controller"
   />
-  <p
-    class="text-red-500 mt-2 text-xs"
-    *ngIf="
-      controller.hasError('required') &&
-      controller.touched  
-    "
-  >
-    Filed is required
-  </p>
+  <ng-container *ngIf="controller.touched">
+    <p
+      class="text-red-500 mt-2 text-xs"
+      *ngIf="controller.errors?.required && controller.errors?.touched"
+    >
+      Filed is required
+    </p>
 
-  <!-- min len check -->
-  <p
-    class="text-red-500 mt-2 text-xs"
-    *ngIf="
-      controller.hasError('minlength') &&
-      controller.touched
-    "
-  >
-    Name must be at least
-    {{ controller.errors['minlength']?.requiredLength }}
-    characters long.
-  </p>
+    <!-- min len check -->
+    <p class="text-red-500 mt-2 text-xs" *ngIf="controller.errors?.minlength">
+      Name must be at least
+      {{ controller.errors?.minlength?.requiredLength }} characters long.
+    </p>
+    <!-- <p>
+      {{ controller.errors | json }}
+    </p> -->
+    <!-- For email -->
+    <p class="text-red-500 mt-2 text-xs" *ngIf="controller.errors?.pattern">
+      Please enter a valid email address.
+    </p>
+
+    <!-- for age -->
+    <p class="text-red-500 mt-2 text-xs" *ngIf="controller.errors?.min">
+      Value is too low
+    </p>
+  </ng-container>
 </div>
