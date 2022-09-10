@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 @Component({
   selector: 'app-auth-custom-input',
   templateUrl: './auth-custom-input.component.html',
@@ -12,6 +12,7 @@ export class AuthCustomInputComponent implements OnInit {
   @Input() pattern?: string;
   @Input() controller: any = new FormControl('');
   @Input() required?: boolean;
+  @Input() format: string = '';
 
   constructor() {}
 

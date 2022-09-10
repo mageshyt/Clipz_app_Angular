@@ -1,5 +1,7 @@
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { NgForm } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-auth-login',
@@ -7,16 +9,36 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./auth-login.component.scss'],
 })
 export class AuthLoginComponent implements OnInit {
-  loginForm = new FormGroup({
-    email: new FormControl('', [
-      Validators.required,
-      Validators.email,
-      Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$'),
-      Validators.maxLength(20),
-    ]),
-    password: new FormControl(''),
-  });
-  constructor() {}
+  credentials = {
+    email: '',
+    password: '',
+  };
+  alertMessage: string = 'Please wait! we are logging you in 😇';
+  showAlert: boolean = false;
+  alertColor: string = 'blue';
+  inSubmission = false;
+  constructor(private auth: AuthService) {}
 
   ngOnInit(): void {}
+
+  async onSubmit(f: NgForm) {
+    this.inSubmission = true;
+
+    const { email, password } = f.form.value;
+    try {
+      await this.auth.login({ email, password });
+      this.showAlert = true;
+    } catch (err) {
+      this.alertMessage =
+        'An error occured while logging you in 😢, please try again';
+      this.showAlert = true;
+      this.inSubmission = false;
+      this.alertColor = 'red';
+      console.log(err);
+      return;
+    }
+    console.log('logged in');
+    this.alertColor = 'green';
+    this.alertMessage = 'Login Successful 🥰';
+  }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 import { ModalService } from 'src/app/services/modal.service';
 
 @Component({
@@ -7,11 +8,15 @@ import { ModalService } from 'src/app/services/modal.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  constructor(private modal: ModalService) {}
+  isAuthenticated: boolean = false;
+  constructor(private modal: ModalService, public auth: AuthService) {
+    this.auth.isAuthenticated$.subscribe((res) => {
+      this.isAuthenticated = res;
+    });
+  }
 
   ngOnInit(): void {}
   showAuthModal() {
-    console.log('showAuthModal');
     this.modal.toggleModal('auth');
   }
 }

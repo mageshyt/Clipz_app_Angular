@@ -8,7 +8,9 @@
     placeholder="{{ placeholder }}"
     pattern="{{ pattern }}"
     required
+    [mask]="format"
     [formControl]="controller"
+    [dropSpecialCharacters]="true"
   />
   <ng-container *ngIf="controller.touched">
     <p
@@ -27,7 +29,7 @@
       {{ controller.errors | json }}
     </p> -->
     <!-- For email -->
-    <p class="text-red-500 mt-2 text-xs" *ngIf="controller.errors?.pattern">
+    <p class="text-red-500 mt-2 text-xs" *ngIf="controller.errors?.email">
       Please enter a valid email address.
     </p>
 
@@ -35,5 +37,13 @@
     <p class="text-red-500 mt-2 text-xs" *ngIf="controller.errors?.min">
       Value is too low
     </p>
-  </ng-container>
+    <!-- password -->
+
+    <p
+      class="text-red-500 mt-2 text-xs"
+      *ngIf="controller.errors?.pattern && controller.label === 'Password'"
+    >
+      Password must contain at least one number and one letter.
+    </p></ng-container
+  >
 </div>

@@ -1,4 +1,7 @@
-<form class="px-4" [formGroup]="loginForm">
+<form class="px-4" #LoginForm="ngForm" (ngSubmit)="onSubmit(LoginForm)">
+  <app-alert *ngIf="showAlert" [color]="alertColor">
+    {{ alertMessage }}
+  </app-alert>
   <!-- Email -->
   <div class="flex flex-col mt-5">
     <label for="password" class="text-gray-200 text-sm font-bold mb-2"
@@ -9,28 +12,59 @@
       required
       type="email"
       placeholder="Email"
-      formControlName="email"
+      #email="ngModel"
+      name="email"
+      ngModel="{{ credentials.email }}"
+      required
       class="block w-full py-1.5 px-3 text-gray-200 border border-gray-400 transition duration-500 focus:outline-none bg-transparent focus:border-indigo-400"
+      pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
     />
   </div>
+  <!-- Errors Mail -->
+  <p
+    *ngIf="email.errors && email.touched"
+    class="text-red-500 text-sm font-bold mb-2"
+  >
+    Email is InValid
+  </p>
+
   <!-- Password -->
   <div class="flex flex-col my-5">
     <label for="password" class="text-gray-200 text-sm font-bold mb-2"
       >password</label
     >
     <input
+      #password="ngModel"
       required
       label="Password"
       type="password"
       class="block w-full py-1.5 px-3 text-gray-200 border border-gray-400 transition duration-500 focus:outline-none bg-transparent focus:border-indigo-400"
       placeholder="Password"
-      formControlName="password"
+      name="password"
+      required
+      ngModel="{{ credentials.password }}"
     />
+    <!-- pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}" -->
   </div>
+
+  <!-- Errors password-->
+  <p
+    *ngIf="password.errors && password.touched"
+    class="text-red-500 text-sm font-bold mb-2"
+  >
+    Password must be at least 8 characters, contain at least one lowercase
+    letter
+  </p>
+
   <!-- submit -->
   <button
     type="submit"
-    class="mt-4 w-full border border-indigo-400 p-2 transition-all transform duration-200 hover:bg-indigo-400"
+    [disabled]="LoginForm.invalid || inSubmission"
+    [ngClass]="{
+      ' cursor-not-allowed disabled:opacity-60 ':
+        LoginForm.invalid || LoginForm.pending || LoginForm.disabled
+    }"
+    class="mt-4 w-full border border-indigo-400 disabled:cursor-not-allowed p-2 transition-all transform duration-200 hover:bg-indigo-400"
   >
     Sign In
   </button>

@@ -1,34 +1,39 @@
-<form class="px-4" [formGroup]="registerForm" (submit)="onSubmit()">
+<div class="px-4">
+  <app-alert *ngIf="showAlert" [color]="alertColor">
+    {{ alertMessage }}
+  </app-alert>
+</div>
+
+<form class="px-4" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
   <!-- name -->
   <app-auth-custom-input
     label="Name"
     type="text"
     placeholder="Enter Name"
-    pattern="[a-zA-Z]*"
     [controller]="this.name"
     minlength="4"
-  ></app-auth-custom-input>
+  >
+  </app-auth-custom-input>
   <!-- email -->
   <app-auth-custom-input
     label="Email"
     type="email"
     placeholder="Email"
-    pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+    [controller]="email"
   ></app-auth-custom-input>
   <!-- password -->
   <app-auth-custom-input
     label="Password"
     type="password"
     placeholder="Password"
-    pattern="[a-zA-Z0-9]*"
     [controller]="password"
   ></app-auth-custom-input>
+
   <!-- confirm password -->
   <app-auth-custom-input
     type="password"
     label="Confirm Password"
     placeholder="confirmPassword"
-    pattern="[a-zA-Z0-9]*"
     [controller]="confirmPassword"
   ></app-auth-custom-input>
   <!-- Age -->
@@ -37,7 +42,6 @@
     label="Age"
     type="number"
     placeholder="Age"
-    pattern="[0-9]*"
     [controller]="age"
   ></app-auth-custom-input>
 
@@ -46,12 +50,18 @@
     label="Phone Number"
     type="tel"
     placeholder="Phone Number"
-    pattern="[0-9]*"
+    [controller]="phoneNumber"
+    format="(00) 0000-0000"
   ></app-auth-custom-input>
   <!-- submit -->
   <button
     type="submit"
-    class="mt-4 w-full border border-indigo-400 p-2 transition-all transform duration-200 hover:bg-indigo-400"
+    [disabled]="registerForm.invalid || loading"
+    class="mt-4 w-full border p-2 disabled:cursor-not-allowed transition-all transform duration-200 hover:bg-indigo-400"
+    [ngClass]="{
+      ' cursor-not-allowed disabled:opacity-60 ':
+        registerForm.invalid || registerForm.pending || registerForm.disabled
+    }"
   >
     submit
   </button>

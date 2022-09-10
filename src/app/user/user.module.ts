@@ -5,8 +5,11 @@ import { AuthLoginComponent } from './auth-login/auth-login.component';
 import { SharedModule } from '../shared/shared.module';
 import { AuthRegisterComponent } from './auth-register/auth-register.component';
 import { AuthCustomInputComponent } from './auth-custom-input/auth-custom-input.component';
-import { ReactiveFormsModule } from '@angular/forms';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxMaskModule } from 'ngx-mask';
+import { AlertComponent } from '../shared/alert/alert.component';
+import { AuthService } from '../services/auth.service';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 @NgModule({
   declarations: [
     AuthModalComponent,
@@ -14,7 +17,20 @@ import { ReactiveFormsModule } from '@angular/forms';
     AuthRegisterComponent,
     AuthCustomInputComponent,
   ],
-  imports: [CommonModule, SharedModule, ReactiveFormsModule],
-  exports: [AuthModalComponent, AuthLoginComponent, ReactiveFormsModule],
+
+  imports: [
+    CommonModule,
+    SharedModule,
+    ReactiveFormsModule,
+    NgxMaskModule.forRoot(),
+    FormsModule,
+  ],
+  exports: [
+    AuthModalComponent,
+    AuthLoginComponent,
+    ReactiveFormsModule,
+    AlertComponent,
+  ],
+  providers: [AuthService],
 })
 export class UserModule {}
