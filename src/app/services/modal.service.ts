@@ -10,7 +10,9 @@ interface IModal {
 })
 export class ModalService {
   private modals: IModal[] = [];
+
   registerModal(id: string) {
+    console.log('registering modal', id);
     this.modals.push({
       isOpen: false,
       id,
@@ -18,8 +20,8 @@ export class ModalService {
   }
 
   toggleModal(id: string): boolean {
-    console.log('modal 👨‍👩‍👧', this.modals);
     const CurrModal = this.modals.find((modal) => modal.id === id);
+    console.log(CurrModal);
     if (CurrModal) {
       CurrModal.isOpen = !CurrModal.isOpen;
     }

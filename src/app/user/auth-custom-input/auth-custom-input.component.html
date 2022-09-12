@@ -44,6 +44,18 @@
       *ngIf="controller.errors?.pattern && controller.label === 'Password'"
     >
       Password must contain at least one number and one letter.
-    </p></ng-container
-  >
+    </p>
+    <!-- conform password -->
+    <p
+      class="text-red-500 mt-2 text-xs"
+      *ngIf="controller.errors?.passwordMismatch"
+    >
+      Passwords must match.
+    </p>
+
+    <!-- Email take -->
+    <p class="text-red-500 mt-2 text-xs" *ngIf="controller.errors?.emailTaken">
+      Email taken . Please try another email.
+    </p>
+  </ng-container>
 </div>

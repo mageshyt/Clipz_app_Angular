@@ -11,6 +11,7 @@ export class AuthModalComponent implements OnInit {
     // this.modalState = this.modal.isModalOpen('auth');
   }
   ngOnInit(): void {
+    console.log('auth modal init');
     this.modal.registerModal('auth');
   }
 }

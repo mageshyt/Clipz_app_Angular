@@ -1,17 +1,23 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
+import { EmailTaken } from '../validators/email-taken';
+import { RegisterValidators } from '../validators/register-validators';
 @Component({
   selector: 'app-auth-register',
   templateUrl: './auth-register.component.html',
   styleUrls: ['./auth-register.component.scss'],
 })
 export class AuthRegisterComponent {
-  email = new FormControl('', [
-    Validators.required,
-    Validators.email,
-    Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
-  ]);
+  email = new FormControl(
+    '',
+    [
+      Validators.required,
+      Validators.email,
+      Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
+    ],
+    [this.emailTaken.validate]
+  );
 
   password = new FormControl('', [Validators.required]);
   confirmPassword = new FormControl('', [Validators.required]);
@@ -23,28 +29,26 @@ export class AuthRegisterComponent {
     Validators.maxLength(10),
   ]);
 
-  registerForm: any = new FormGroup({
-    email: this.email,
-    password: this.password,
-    confirmPassword: this.confirmPassword,
-    name: this.name,
-    age: this.age,
-    phoneNumber: this.phoneNumber,
-  });
+  registerForm: any = new FormGroup(
+    {
+      email: this.email,
+      password: this.password,
+      confirmPassword: this.confirmPassword,
+      name: this.name,
+      age: this.age,
+      phoneNumber: this.phoneNumber,
+    },
+    [RegisterValidators.checkPasswordMatch('password', 'confirmPassword')]
+  );
 
   alertMessage: string = '';
   showAlert: boolean = false;
   alertColor: string = 'blue';
 
-  ngOnInit(): void {
-    console.log(this.registerForm);
-  }
+  ngOnInit(): void {}
 
   checkPasswordMatch(password: string, confirmPassword: string): boolean {
-    if (
-      this.registerForm.value.password ===
-      this.registerForm.value.confirmPassword
-    ) {
+    if (password === confirmPassword) {
       console.log(this.registerForm.value);
       return true;
     } else {
@@ -55,7 +59,7 @@ export class AuthRegisterComponent {
     return false;
   }
 
-  constructor(private auth: AuthService) {}
+  constructor(private auth: AuthService, private emailTaken: EmailTaken) {}
   loading: boolean = false;
   async onSubmit() {
     this.loading = true;

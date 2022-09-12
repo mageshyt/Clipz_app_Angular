@@ -15,5 +15,9 @@
 
   <!-- Game Card -->
   <app-game-clips></app-game-clips>
-  <app-auth-modal></app-auth-modal>
+  <!-- Modal -->
+
+  <app-auth-modal
+    *ngIf="(auth.isAuthenticatedWithDelay$ | async) === false"
+  ></app-auth-modal>
 </div>

@@ -9,7 +9,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxMaskModule } from 'ngx-mask';
 import { AlertComponent } from '../shared/alert/alert.component';
 import { AuthService } from '../services/auth.service';
-import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 @NgModule({
   declarations: [
     AuthModalComponent,
