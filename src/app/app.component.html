@@ -1,23 +1,7 @@
-<div class="scrollbar-hide h-screen">
-  <!-- Header -->
-  <app-header></app-header>
-  <!-- Intro -->
-  <app-intro></app-intro>
-
-  <!-- Latest -->
-  <div
-    class="flex flex-row w-full items-center mx-auto max-w-7xl mt-5 justify-center"
-  >
-    <hr class="border-b-[1px] flex-1 border-white" />
-    <h1 class="uppercase text-center text-4xl mx-6">Latest</h1>
-    <hr class="border-b-[1px] border-white flex-1" />
-  </div>
-
-  <!-- Game Card -->
-  <app-game-clips></app-game-clips>
-  <!-- Modal -->
-
-  <app-auth-modal
-    *ngIf="(auth.isAuthenticatedWithDelay$ | async) === false"
-  ></app-auth-modal>
-</div>
+<!-- Header -->
+<app-header></app-header>
+<router-outlet></router-outlet>
+<!-- <router-outlet name="about"></router-outlet> -->
+<app-auth-modal
+  *ngIf="(auth.isAuthenticatedWithDelay$ | async) === false"
+></app-auth-modal>

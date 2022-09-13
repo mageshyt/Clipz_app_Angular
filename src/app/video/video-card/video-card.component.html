@@ -1,0 +1,29 @@
+<div
+  class="h-[450px] my-2 flex flex-col justify-between w-[450px] bg-[#283046] rounded-md"
+>
+  <!-- image -->
+  <div class="h-auto">
+    <img [src]="imgUrl" class="rounded-t-md" />
+    <!-- Body -->
+    <div class="p-4 text-2xl w-full items-center flex">
+      <!-- Link -->
+      <span class="font-semibold flex-1 mb-2"> {{ title }}</span>
+      <span class="bg-gray-400 text-white px-2 py-1 h-7 ml-2 text-sm rounded">
+        Copy Link
+      </span>
+    </div>
+  </div>
+  <!-- Actions -->
+  <div class="flex text-center text-2xl mt-6 bg-gray-800 p-2">
+    <span
+      class="flex-1 p-2 border-right border-r-2 cursor-pointer border-gray-700 transition hover:text-indigo-400"
+    >
+      <span class="material-icons text-base">build</span>
+    </span>
+    <span
+      class="flex-1 p-2 rounded-br-2xl transition cursor-pointer hover:text-indigo-400"
+    >
+      <span class="material-icons text-base">delete</span>
+    </span>
+  </div>
+</div>

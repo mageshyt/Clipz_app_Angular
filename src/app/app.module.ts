@@ -11,6 +11,9 @@ import { UserModule } from './user/user.module';
 import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { HomeComponent } from './component/home/home.component';
+import { AboutComponent } from './component/about/about.component';
+import { VideoModule } from './video/video.module';
 
 @NgModule({
   declarations: [
@@ -19,6 +22,8 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
     IntroComponent,
     GameCardComponent,
     GameClipsComponent,
+    HomeComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,6 +31,7 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
     UserModule,
     AngularFirestoreModule,
     AngularFireModule.initializeApp(environment.firebase),
+    VideoModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

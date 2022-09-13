@@ -1,0 +1,15 @@
+<div class="mt-10  max-w-[1600px] mx-auto">
+  <!--    Top bar -->
+  <app-top-bar></app-top-bar>
+  <!-- uploaded video -->
+  <div
+    class="grid xl:grid-cols-3 pb-[80px] gap-4 lg:grid-cols-2 grid-cols-1 place-items-center mt-10"
+  >
+    <app-video-card
+      *ngFor="let game of gameDetails"
+      [imgUrl]="game.gameImage"
+      [title]="game.gameTitle"
+    >
+    </app-video-card>
+  </div>
+</div>

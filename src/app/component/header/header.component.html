@@ -1,9 +1,7 @@
 <header class="bg-[#283046] overflow-hidden">
   <nav class="container mx-auto flex justify-start items-center py-8 px-4">
     <!-- App Name -->
-    <a
-      class="text-3xl text-indigo-400 font-bold uppercase mr-4"
-      href="index.html"
+    <a class="text-3xl text-indigo-400 font-bold uppercase mr-4" routerLink="/"
       >Clipz</a
     >
     <!-- Nav items -->
@@ -18,22 +16,30 @@
       <ng-template #authLinks>
         <!-- logout -->
         <span
+          routerLinkActive="text-indigo-400"
           (click)="logout($event)"
           class="cursor-pointer transform transition-all duration-200 hover:scale-110"
           >Logout</span
         >
 
         <span
+          routerLinkActive="text-indigo-400"
+          routerLink="/manage"
+          [routerLinkActiveOptions]="{ exact: true }"
           class="cursor-pointer transform transition-all duration-200 hover:scale-110"
           >Manage</span
         >
         <span
+          routerLinkActive="text-indigo-400"
+          routerLink="/about"
+          class="cursor-pointer transform transition-all duration-200 hover:scale-110"
+        >
+          About
+        </span>
+        <span
+          routerLinkActive="text-indigo-400"
           class="cursor-pointer transform transition-all duration-200 hover:scale-110"
           >Upload</span
-        >
-        <span
-          class="cursor-pointer transform transition-all duration-200 hover:scale-110"
-          >About</span
         >
       </ng-template>
     </div>
