@@ -33,4 +33,11 @@ export const games: Games[] = [
     gameImage:
       'https://as01.epimg.net/meristation/imagenes/2020/04/20/noticias/1587396399_171528_1587396566_noticia_normal.jpg',
   },
+  {
+    gameTitle: 'Valorant',
+    UploadedDate: '1-12-2022',
+    postedBY: 'Lara Magesh 💗',
+    gameImage:
+      'https://as01.epimg.net/meristation/imagenes/2020/04/20/noticias/1587396399_171528_1587396566_noticia_normal.jpg',
+  },
 ];

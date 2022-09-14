@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Observable } from 'rxjs';
-import { delay, map } from 'rxjs/operators';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { Observable, of } from 'rxjs';
+import { delay, map, filter, switchMap } from 'rxjs/operators';
 
 interface userDoc {
   email: string;
@@ -30,7 +31,13 @@ interface userCollection {
 export class AuthService {
   public isAuthenticated$!: Observable<boolean>;
   public isAuthenticatedWithDelay$!: Observable<boolean>;
-  constructor(private auth: AngularFireAuth, private db: AngularFirestore) {
+  private redirect: boolean = false;
+  constructor(
+    private auth: AngularFireAuth,
+    private db: AngularFirestore,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
     auth.user.subscribe((user) => {
       if (user) {
         console.log('User is logged in', user);
@@ -43,6 +50,17 @@ export class AuthService {
       delay(1000),
       map((user) => !!user)
     );
+    this.router.events
+      .pipe(
+        filter((event) => event instanceof NavigationEnd),
+
+        map((e) => this.route.firstChild),
+        //! get the data from the route
+        switchMap((route) => route?.data ?? of({}))
+      )
+      .subscribe((data: any) => {
+        this.redirect = data.authOnly ?? false;
+      });
   }
 
   public async createUser(data: userDoc) {
@@ -69,6 +87,11 @@ export class AuthService {
   }
   //! signOut
   public async signOut<Observable>() {
-    return await this.auth.signOut();
+    // ! if you want to redirect to a page after signOut
+    return await this.auth.signOut().then(() => {
+      if (this.redirect) {
+        this.router.navigateByUrl('/');
+      }
+    });
   }
 }

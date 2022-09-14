@@ -18,11 +18,12 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {}
   showAuthModal() {
     const res = this.modal.toggleModal('auth');
-
-    console.log(res);
   }
   async logout($event: Event) {
-    $event.preventDefault();
+    if ($event) {
+      $event.preventDefault();
+    }
     await this.auth.signOut();
   }
+  
 }

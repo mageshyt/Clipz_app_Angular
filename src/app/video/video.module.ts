@@ -5,13 +5,15 @@ import { VideoRoutingModule } from './video-routing.module';
 import { ManageComponent } from './manage/manage.component';
 import { VideoCardComponent } from './video-card/video-card.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
+import { UploadComponent } from './upload/upload.component';
 
 
 @NgModule({
   declarations: [
     ManageComponent,
     VideoCardComponent,
-    TopBarComponent
+    TopBarComponent,
+    UploadComponent
   ],
   imports: [
     CommonModule,
