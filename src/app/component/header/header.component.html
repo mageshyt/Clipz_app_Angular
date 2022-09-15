@@ -14,14 +14,6 @@
       </span>
 
       <ng-template #authLinks>
-        <!-- logout -->
-        <span
-          routerLinkActive="text-indigo-400"
-          (click)="logout($event)"
-          class="cursor-pointer transform transition-all duration-200 hover:scale-110"
-          >Logout</span
-        >
-
         <span
           routerLinkActive="text-indigo-400"
           routerLink="/manage"
@@ -35,6 +27,13 @@
           routerLink="/upload"
           class="cursor-pointer transform transition-all duration-200 hover:scale-110"
           >Upload</span
+        >
+        <!-- logout -->
+        <span
+          routerLinkActive="text-indigo-400"
+          (click)="logout($event)"
+          class="cursor-pointer transform transition-all duration-200 hover:scale-110"
+          >Logout</span
         >
       </ng-template>
       <span

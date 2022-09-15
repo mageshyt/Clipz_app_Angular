@@ -45,6 +45,7 @@ export class AuthService {
         console.log('User is not logged in');
       }
     });
+
     this.isAuthenticated$ = auth.user.pipe(map((user) => !!user));
     this.isAuthenticatedWithDelay$ = auth.user.pipe(
       delay(1000),
