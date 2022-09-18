@@ -29,6 +29,7 @@ import { AuthService } from '../services/auth.service';
     AuthLoginComponent,
     ReactiveFormsModule,
     AlertComponent,
+    AuthCustomInputComponent,
   ],
   providers: [AuthService],
 })

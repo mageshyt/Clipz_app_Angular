@@ -84,7 +84,6 @@ export class AuthRegisterComponent {
             age,
             phoneNumber,
           });
-          console.log(res);
 
           this.alertMessage = 'Registration Successful';
           this.showAlert = true;

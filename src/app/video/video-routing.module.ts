@@ -23,11 +23,11 @@ const routes: Routes = [
   {
     path: 'upload',
     component: UploadComponent,
-    // canActivate: [AngularFireAuthGuard],
+    canActivate: [AngularFireAuthGuard],
 
     data: {
-      // authOnly: true,
-      // authGuard: redirectUnauthorizedToLogin,
+      authOnly: true,
+      authGuard: redirectUnauthorizedToLogin,
     },
   },
   {

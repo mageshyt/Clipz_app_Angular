@@ -36,6 +36,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     AngularFireModule.initializeApp(environment.firebase),
     VideoModule,
     AppRoutingModule,
+    AngularFirestoreModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

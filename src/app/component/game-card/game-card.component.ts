@@ -18,7 +18,7 @@ export class GameCardComponent implements OnInit {
 
   ngOnInit(): void {
     // console.log(this.gameDay, new Date(this.UploadedDate));
-    this.gameDay = new Date(this.UploadedDate);
+    // this.gameDay = new Date(this.UploadedDate);
   }
 
   onclick(game_title: String | undefined) {
