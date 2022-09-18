@@ -15,10 +15,23 @@ export class UploadComponent implements OnInit {
   selectedImage: number = 0;
   constructor() {}
 
+  isDrageOver: boolean = false; // it helps to check if the file  hover or not
   ngOnInit(): void {}
+
+  file: File | null = null;
 
   setThumbnail(index: any) {
     this.selectedImage = index;
   }
-  upload(){}
+  upload() {}
+  onDrop(event: any) {
+    this.isDrageOver = false;
+    this.file = event.dataTransfer.files[0];
+    //! only it should be mp4
+    if (!this.file || this.file.type !== 'video/mp4') {
+      this.file = null;
+      return;
+    }
+    console.log(this.file?.type);
+  }
 }

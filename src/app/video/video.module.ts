@@ -6,18 +6,15 @@ import { ManageComponent } from './manage/manage.component';
 import { VideoCardComponent } from './video-card/video-card.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { UploadComponent } from './upload/upload.component';
-
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
     ManageComponent,
     VideoCardComponent,
     TopBarComponent,
-    UploadComponent
+    UploadComponent,
   ],
-  imports: [
-    CommonModule,
-    VideoRoutingModule
-  ]
+  imports: [CommonModule, SharedModule, VideoRoutingModule],
 })
-export class VideoModule { }
+export class VideoModule {}

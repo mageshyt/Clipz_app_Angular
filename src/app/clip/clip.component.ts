@@ -15,7 +15,7 @@ export class ClipComponent implements OnInit, DoCheck {
   ngOnInit(): void {
     this.game_title = this.route.snapshot.params['id'];
   }
-  //! this will check when again route change 
+  //! this will check when again route change
   ngDoCheck(): void {
     this.game_title = this.route.snapshot.params['id'];
   }
