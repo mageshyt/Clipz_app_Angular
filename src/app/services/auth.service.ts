@@ -32,14 +32,18 @@ export class AuthService {
   public isAuthenticated$!: Observable<boolean>;
   public isAuthenticatedWithDelay$!: Observable<boolean>;
   private redirect: boolean = false;
+    public currentUser:any;
   constructor(
     private auth: AngularFireAuth,
     private db: AngularFirestore,
     private router: Router,
     private route: ActivatedRoute
   ) {
+
+
     auth.user.subscribe((user) => {
       if (user) {
+        this.currentUser = user;
         console.log('User is logged in', user);
       } else {
         console.log('User is not logged in');

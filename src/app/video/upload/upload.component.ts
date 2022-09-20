@@ -4,12 +4,14 @@ import {
   AngularFireStorage,
   AngularFireUploadTask,
 } from '@angular/fire/compat/storage';
+import firebase from 'firebase/compat/app';
 import { v4 as uuidv4 } from 'uuid';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { last, switchMap } from 'rxjs/operators';
 import { ClipService } from 'src/app/services/clip.service';
 import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-upload',
   templateUrl: './upload.component.html',
@@ -106,22 +108,27 @@ export class UploadComponent implements OnDestroy {
         switchMap(() => clipRef.getDownloadURL())
       )
       .subscribe({
-        next: (url) => {
+        next: async (url) => {
           const uploadDoc = {
             uid: this.user.uid,
             displayName: this.user.displayName,
             title: this.title.value,
             fileName: `${randomFileName}.mp4`,
             url,
+            timeStamp: firebase.firestore.FieldValue.serverTimestamp(),
           };
           //! create the doc
-          this.clip_service.createClip(uploadDoc).then(() => {
-            //! update the info in the firebase database
-            this.alert.message = 'Video uploaded successfully 🥰';
-            this.submitting = false;
-            this.alert.alertColor = 'green';
-          });
-          this.route.navigate(['/', 'manage']);
+          const res: any = await this.clip_service
+            .createClip(uploadDoc)
+            .then((res) => {
+              //! update the info in the firebase database
+              this.alert.message = 'Video uploaded successfully 🥰';
+              this.submitting = false;
+              this.alert.alertColor = 'green';
+              setTimeout(() => {
+                this.route.navigate(['/', 'clip', res?.id]);
+              }, 1000);
+            });
         },
         error: (error) => {
           this.uploadForm.enable();
