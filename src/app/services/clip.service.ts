@@ -15,6 +15,7 @@ export interface IClip {
   displayName: string;
   url: string;
   timeStamp: firebase.firestore.FieldValue;
+  fileName: string;
 }
 
 @Injectable({
@@ -40,7 +41,19 @@ export class ClipService {
       .where('uid', '==', currentUser.uid)
       .get();
     const data = query.docs.map((doc) => doc.data() as IClip);
-    return await data;
+    return data;
+  };
+
+  //! function ot update the name
+  public updateClip = async (newTitle: string, cipId: string) => {
+    console.log('update clip', newTitle, cipId);
+    return this.clipsCollection.ref
+      .where('fileName', '==', cipId)
+      .get()
+      .then((data) => {
+        data.docs[0].ref.update({
+          title: newTitle,
+        });
+      });
   };
 }
-
