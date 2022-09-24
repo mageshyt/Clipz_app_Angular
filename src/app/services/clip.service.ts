@@ -8,6 +8,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { AuthService } from './auth.service';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 export interface IClip {
   uid: string;
@@ -26,7 +27,8 @@ export class ClipService {
   constructor(
     private db: AngularFirestore,
     private auth: AngularFireAuth,
-    private userAuth: AuthService
+    private userAuth: AuthService,
+    private storage: AngularFireStorage
   ) {
     this.clipsCollection = db.collection('clips');
   }
@@ -55,5 +57,18 @@ export class ClipService {
           title: newTitle,
         });
       });
+  };
+
+  //! delete clip
+
+  public deleteClip = async (clipId: string) => {
+    const res1 = this.clipsCollection.ref
+      .where('fileName', '==', clipId)
+      .get()
+      .then((data) => {
+        data.docs[0].ref.delete().then(() => console.log('deleted'));
+      });
+    const res2 = this.storage.ref(`clips/${clipId}`).delete();
+    return Promise.all([res1, res2]);
   };
 }

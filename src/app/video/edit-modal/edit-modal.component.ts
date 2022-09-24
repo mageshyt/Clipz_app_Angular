@@ -9,7 +9,6 @@ import {
   OnChanges,
 } from '@angular/core';
 import { ModalService } from 'src/app/services/modal.service';
-import { VideoCardComponent } from '../video-card/video-card.component';
 
 @Component({
   selector: 'app-edit-modal',
@@ -34,6 +33,7 @@ export class EditModalComponent implements OnInit, OnDestroy, OnChanges {
     this.modal.unregisterModal('video');
   }
 
+
   //! for alert component
   alert: any = {
     show: false,
@@ -44,6 +44,9 @@ export class EditModalComponent implements OnInit, OnDestroy, OnChanges {
     if (this.activeClip) {
       this.title.setValue(this.activeClip.title);
     }
+
+    this.alert.show = false;
+    
   }
   submit = async ($event: Event) => {
     $event.preventDefault();
