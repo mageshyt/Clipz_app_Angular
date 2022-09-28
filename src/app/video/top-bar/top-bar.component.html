@@ -2,13 +2,19 @@
   class="flex flex-row flex-1 max-w-[1500px] px-4 items-center justify-between mx-8 bg-[#283046] h-[80px]"
 >
   <!-- Upload btn -->
-  <button class="bg-indigo-400 text-white font-bold py-3 px-6 rounded">
+  <button
+    routerLink="/upload"
+    class="bg-indigo-400 text-white font-bold py-3 px-6 rounded"
+  >
     Upload Videos
   </button>
   <!-- Recent uploads -->
-  <button
-    class="bg-transparent text-white font-bold py-3 px-6 border hover:bg-white hover:text-black rounded"
+
+  <select
+    (change)="sort($event)"
+    class="bg-transparent text-white font-bold py-3 px-6 border outline-none appearance-none cursor-pointer hover:bg-white hover:text-black rounded"
   >
-    Recent Uploads
-  </button>
+    <option [selected]="videoOrder === '1'" value="1">Recent Uploads</option>
+    <option [selected]="videoOrder === '2'" value="2">Oldest Uploads</option>
+  </select>
 </div>

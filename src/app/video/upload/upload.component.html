@@ -1,4 +1,4 @@
-<div class="flex items-center justify-center">
+<div class="flex items-center pb-24 justify-center">
   <div class="bg-[#283046] flex-1 mt-10 max-w-[1500px] p-4 mx-4">
     <!-- uploads video -->
     <div>
@@ -6,23 +6,76 @@
 
       <!-- upload asset -->
       <div
-        class="border my-5 transform transition-all duration-200 hover:border-none rounded-md hover:bg-indigo-400 select-none relative border-dotted text-center p-10"
+        *ngIf="!file; else formTemplate"
+        app-event-blocker
+        (dragend)="isDrageOver = false"
+        (dragenter)="isDrageOver = true"
+        (dragleave)="isDrageOver = false"
+        (dragover)="isDrageOver = true"
+        (mouseleave)="isDrageOver = false"
+        (drop)="onDrop($event)"
+        [ngClass]="{ 'bg-indigo-400 border-solid ': isDrageOver }"
+        class="border my-5 flex items-center justify-center transform transition-all duration-200 hover:border-none rounded-md hover:bg-indigo-400 select-none relative border-dotted text-center p-10"
       >
         <input
           type="file"
           class="h-[200px] opacity-0 w-full text-center cursor-pointer bg-red-400"
           nv-file-select
           #fileInput
+          (change)="onDrop($event)"
         />
-        <span class="absolute right-[45%] text-2xl top-1/2 cursor-pointer">
+        <span class="absolute md:text-2xl text-lg cursor-pointer">
           Drop your file here mp4 only !
         </span>
       </div>
     </div>
 
     <!-- set thumbnail -->
-    <div>
+    <ng-template #formTemplate>
+      <app-alert *ngIf="alert.show" [color]="alert.alertColor">
+        {{ alert.message }}
+      </app-alert>
       <span class="text-xl font-medium text-white"> set thumbnail </span>
-    </div>
+
+      <div class="flex flex-col select-none lg:flex-row justify-evenly mt-4">
+        <div *ngFor="let img of images">
+          <img
+            [src]="img"
+            alt=""
+            class="lg:w-[450px] my-5 cursor-pointer"
+            (click)="setThumbnail(images.indexOf(img))"
+            [ngClass]="
+              selectedImage === images.indexOf(img)
+                ? 'border-[8px]   border-green-400'
+                : 'border-none'
+            "
+          />
+        </div>
+      </div>
+      <!-- form -->
+      <form [formGroup]="uploadForm" (ngSubmit)="upload()">
+        <div>
+          <span class="mb-4 text-xl font-medium text-white mt-5 block">
+            Title
+          </span>
+          <app-auth-custom-input
+            label="Title"
+            type="text"
+            placeholder="Title"
+            [controller]="title"
+            minlength="4"
+          ></app-auth-custom-input>
+        </div>
+        <!-- submit button -->
+        <div class="mt-5 flex justify-end">
+          <button
+            [disabled]="!uploadForm.valid || !file || submitting"
+            class="bg-indigo-400 text-white px-4 py-2 rounded-md disabled:cursor-not-allowed"
+          >
+            Upload
+          </button>
+        </div>
+      </form>
+    </ng-template>
   </div>
 </div>
