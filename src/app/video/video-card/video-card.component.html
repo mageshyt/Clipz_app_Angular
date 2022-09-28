@@ -1,5 +1,5 @@
 <div
-  class="h-[450px] my-2 flex flex-col justify-between w-[450px] bg-[#283046] rounded-md"
+  class="h-[450px] my-2 s flex-col justify-between w-[420px] md:w-[450px] flex bg-[#283046] rounded-md"
 >
   <!-- image -->
   <div class="h-auto">
@@ -16,11 +16,13 @@
   <!-- Actions -->
   <div class="flex text-center text-2xl mt-6 bg-gray-800 p-2">
     <span
+      (click)="showVideoModal($event, videoData)"
       class="flex-1 p-2 border-right border-r-2 cursor-pointer border-gray-700 transition hover:text-indigo-400"
     >
       <span class="material-icons text-base">build</span>
     </span>
     <span
+      (click)="delete($event, videoData.fileName)"
       class="flex-1 p-2 rounded-br-2xl transition cursor-pointer hover:text-indigo-400"
     >
       <span class="material-icons text-base">delete</span>

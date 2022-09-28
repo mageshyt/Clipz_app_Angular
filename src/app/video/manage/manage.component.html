@@ -1,15 +1,17 @@
-<div class="mt-10 container mx-auto">
+<div class="mt-10 overflow-hidden container mx-auto">
   <!--    Top bar -->
   <app-top-bar></app-top-bar>
   <!-- uploaded video -->
-  <div
-    class="grid xl:grid-cols-3 pb-[80px] gap-4 lg:grid-cols-2 grid-cols-1 place-items-center mt-10"
-  >
+  <div class="flex flex-1 items-center justify-center flex-wrap gap-5">
     <app-video-card
       *ngFor="let game of gameDetails"
       [imgUrl]="game.gameImage"
-      [title]="game.gameTitle"
+      [title]="game.title"
+      [videoData]="game"
+      (openModal)="openModal($event)"
     >
     </app-video-card>
   </div>
 </div>
+
+<app-edit-modal [activeClip]="activeClip"></app-edit-modal>
