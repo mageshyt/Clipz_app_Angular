@@ -17,6 +17,8 @@ export interface IClip {
   url: string;
   timeStamp: firebase.firestore.FieldValue;
   fileName: string;
+  thumbnail: string;
+  screen_short_name: string;
 }
 
 @Injectable({
@@ -38,7 +40,7 @@ export class ClipService {
   //! function to get all the clips from firebase
   public getClips = async (): Promise<IClip[]> => {
     const currentUser = await this.userAuth.currentUser;
-    console.log('current user', currentUser.uid);
+
     const query = await this.clipsCollection.ref
       .where('uid', '==', currentUser.uid)
       .get();
@@ -61,14 +63,27 @@ export class ClipService {
 
   //! delete clip
 
-  public deleteClip = async (clipId: string) => {
+  public deleteClip = async (clip: IClip) => {
     const res1 = this.clipsCollection.ref
-      .where('fileName', '==', clipId)
+      .where('fileName', '==', clip.fileName)
       .get()
       .then((data) => {
         data.docs[0].ref.delete().then(() => console.log('deleted'));
       });
-    const res2 = this.storage.ref(`clips/${clipId}`).delete();
-    return Promise.all([res1, res2]);
+    const res2 = this.storage.ref(`clips/${clip.fileName}`).delete();
+    const res3 = this.storage
+      .ref(`thumbnails/${clip.screen_short_name}`)
+      .delete();
+
+    return Promise.all([res1, res2, res3]);
   };
+
+  //! get video link
+  public async getVideoLink(video_id: string) {
+    const currentUser = await this.userAuth.currentUser;
+    const query = await this.clipsCollection.doc(video_id).ref.get();
+    const data = query.data() as IClip;
+    console.log(data);
+    return data.url;
+  }
 }

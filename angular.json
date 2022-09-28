@@ -24,12 +24,18 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              { "input": "node_modules/@ffmpeg/core/dist",
+              "src/favicon.ico",
+              "src/assets",
+              {
+                "input": "node_modules/@ffmpeg/core/dist",
                 "output": "node_modules/@ffmpeg/core/dist",
                 "glob": "*"
               }
             ],
-            "styles": ["src/styles.scss"],
+            "styles": [
+              "src/styles.scss",
+              "node_modules/ngx-spinner/animations/ball-scale-multiple.css"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -75,7 +81,13 @@
               "browserTarget": "clips_app:build:development"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "development",
+          "options": {
+            "headers": {
+              "Cross-Origin-Embedder-Policy": "require-corp",
+              "Cross-Origin-Opener-Policy": "same-origin"
+            }
+          }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",

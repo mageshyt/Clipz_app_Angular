@@ -1,3 +1,4 @@
+import { FfmpegService } from './../../services/ffmpeg.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {
@@ -11,6 +12,8 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { last, switchMap } from 'rxjs/operators';
 import { ClipService } from 'src/app/services/clip.service';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { combineLatest, forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-upload',
@@ -30,11 +33,14 @@ export class UploadComponent implements OnDestroy {
     private auth: AngularFireAuth,
     private db: AngularFirestore,
     private clip_service: ClipService,
-    private route: Router
+    private route: Router,
+    public FfmpegService: FfmpegService
   ) {
     this.auth.user.subscribe((user) => {
       this.user = user;
     });
+    console.log('ffmpeg loaded');
+    this.FfmpegService.load();
   }
   isDrageOver: boolean = false; // it helps to check if the file  hover or not
 
@@ -74,48 +80,71 @@ export class UploadComponent implements OnDestroy {
   //! current user
 
   //! method to upload the file
-  upload() {
+  async upload() {
     //! disable the form
     this.uploadForm.disable();
     this.submitting = true;
     this.alert.show = true;
     this.alert.message = 'Please wait! we are uploading your video 😇';
-    this.alert.alertColor = 'blue';
+    this.alert.alertColor = 'pink';
 
     if (!this.file) {
       return;
     }
+
     const randomFileName = uuidv4();
     const clipPath = `clips/${randomFileName}.mp4`;
-    console.log(clipPath, this.file);
     this.task = this.storage.upload(clipPath, this.file); //! upload the file to firebase storage
     const clipRef = this.storage.ref(clipPath);
 
+    const screen_short = await this.FfmpegService.blobFromUrl(
+      this.images[this.selectedImage]
+    );
+    const screen_short_path = `thumbnails/${randomFileName}.jpg`;
+    const screen_short_ref = this.storage.ref(screen_short_path);
+
+    const screen_short_task = this.storage.upload(
+      screen_short_path,
+      screen_short
+    );
+
     //! percentage of the file uploaded
-    this.task.percentageChanges().subscribe((percentage) => {
-      if (percentage) {
-        this.alert.message = `Please wait! we are uploading your video ${Math.floor(
-          percentage
-        )}% 😇`;
-      }
+    combineLatest(
+      this.task.percentageChanges(),
+      screen_short_task.percentageChanges()
+    ).subscribe((percentage) => {
+      const [clip_percentage, screen_short_percentage] = percentage;
+      if (clip_percentage && screen_short_percentage)
+        if (percentage) {
+          this.alert.message = `Please wait! we are uploading your video ${Math.floor(
+            clip_percentage + screen_short_percentage / 200
+          )}% 😇`;
+        }
     });
     //! download url of the file
 
-    this.task
-      .snapshotChanges()
+    forkJoin([this.task.snapshotChanges(), screen_short_task.snapshotChanges()])
       .pipe(
         last(),
-        switchMap(() => clipRef.getDownloadURL())
+        switchMap(() =>
+          forkJoin([
+            clipRef.getDownloadURL(),
+            screen_short_ref.getDownloadURL(),
+          ])
+        )
       )
       .subscribe({
-        next: async (url) => {
+        next: async (urls) => {
+          const [clip_url, screen_short_url] = urls;
           const uploadDoc = {
             uid: this.user.uid,
             displayName: this.user.displayName,
             title: this.title.value,
             fileName: `${randomFileName}.mp4`,
-            url,
+            url: clip_url,
+            thumbnail: screen_short_url,
             timeStamp: firebase.firestore.FieldValue.serverTimestamp(),
+            screen_short_name: `${randomFileName}.jpg`,
           };
           //! create the doc
           const res: any = await this.clip_service
@@ -140,8 +169,7 @@ export class UploadComponent implements OnDestroy {
       });
   }
 
-  onDrop(event: any) {
-    console.log(event);
+  async onDrop(event: any) {
     this.isDrageOver = false;
     this.file = event.dataTransfer
       ? event.dataTransfer.files[0]
@@ -151,6 +179,9 @@ export class UploadComponent implements OnDestroy {
       this.file = null;
       return;
     }
+    const screen_short = await this.FfmpegService.getScreenshot(this.file);
+    this.images = screen_short;
+
     this.title.setValue(this.file.name.replace('.mp4', ''));
   }
 }

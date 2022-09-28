@@ -1,5 +1,5 @@
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Games } from 'src/app/component/game-clips/game-clips.component';
 import { ClipService, IClip } from 'src/app/services/clip.service';
@@ -30,13 +30,17 @@ export class ManageComponent implements OnInit {
   ngOnInit(): void {
     const res = this.clip.getClips().then((data) => {
       this.gameDetails = data;
-
-      console.log(data);
     });
   }
+
   activeClip: IClip | undefined;
   openModal($clip: IClip) {
     this.modal.toggleModal('video');
     this.activeClip = $clip;
+  }
+  onDelete($clip: IClip) {
+    this.gameDetails = this.gameDetails.filter((clip: IClip) => {
+      return clip.fileName !== $clip.fileName;
+    });
   }
 }

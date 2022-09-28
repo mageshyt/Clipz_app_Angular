@@ -10,6 +10,8 @@ import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserModule } from '../user/user.module';
 import { EditModalComponent } from './edit-modal/edit-modal.component';
+import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
+import { SafeURLPipe } from './pipes/safe-url.pipe';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,15 @@ import { EditModalComponent } from './edit-modal/edit-modal.component';
     TopBarComponent,
     UploadComponent,
     EditModalComponent,
+    SafeURLPipe,
   ],
-  imports: [CommonModule, SharedModule, VideoRoutingModule,ReactiveFormsModule,UserModule],
+  imports: [
+    CommonModule,
+    SharedModule,
+    VideoRoutingModule,
+    ReactiveFormsModule,
+    UserModule,
+    NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' }),
+  ],
 })
 export class VideoModule {}

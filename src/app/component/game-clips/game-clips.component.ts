@@ -14,6 +14,7 @@ export interface Games {
 })
 export class GameClipsComponent implements OnInit {
   gameDetails = games;
+
   constructor() {}
 
   ngOnInit(): void {}

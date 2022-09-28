@@ -11,22 +11,25 @@ export class VideoCardComponent implements OnInit {
   @Input() title?: string;
   @Input() videoData: any;
   @Output() openModal: EventEmitter<IClip> = new EventEmitter();
+  @Output() onDelete: EventEmitter<IClip> = new EventEmitter();
   edit($event: any) {
     console.log('edit', $event);
   }
 
-  constructor(private modal: ModalService, private clip: ClipService) {}
+  constructor(private modal: ModalService, private clip: ClipService) {
+    console.log('video card', this.videoData);
+  }
 
   ngOnInit(): void {}
-
   showVideoModal($event: any, clip: IClip) {
     $event.preventDefault();
     this.openModal.emit(clip);
   }
 
-  delete($event: any, clipId: string) {
+  delete($event: any, clip: IClip) {
     $event.preventDefault();
     // console.log('delete', clipId);
-    this.clip.deleteClip(clipId);
+    this.clip.deleteClip(clip);
+    this.onDelete.emit(clip);
   }
 }

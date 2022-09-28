@@ -5,10 +5,11 @@
   <div class="flex flex-1 items-center justify-center flex-wrap gap-5">
     <app-video-card
       *ngFor="let game of gameDetails"
-      [imgUrl]="game.gameImage"
       [title]="game.title"
+      [imgUrl]="game.imgUrl"
       [videoData]="game"
       (openModal)="openModal($event)"
+      (onDelete)="onDelete($event)"
     >
     </app-video-card>
   </div>
