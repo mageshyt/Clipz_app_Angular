@@ -25,6 +25,9 @@ export interface IClip {
   providedIn: 'root',
 })
 export class ClipService {
+  pageClips: IClip[] = [];
+  pendingRequest = false;
+
   public clipsCollection: AngularFirestoreCollection<IClip | null>;
   constructor(
     private db: AngularFirestore,
@@ -38,7 +41,7 @@ export class ClipService {
     return this.clipsCollection.add(data);
   };
   //! function to get all the clips from firebase
-  public getClips = async (): Promise<IClip[]> => {
+  public get_user_Clips = async (): Promise<IClip[]> => {
     const currentUser = await this.userAuth.currentUser;
 
     const query = await this.clipsCollection.ref
@@ -85,5 +88,27 @@ export class ClipService {
     const data = query.data() as IClip;
     console.log(data);
     return data.url;
+  }
+
+  // ! get clips
+  public async getClips() {
+    console.log('start');
+    if (this.pendingRequest) return;
+    this.pendingRequest = true;
+    let query = this.clipsCollection.ref.orderBy('timeStamp', 'desc').limit(6);
+    const { length } = this.pageClips;
+    if (length) {
+      const last_doc_id = this.pageClips[length - 1].fileName;
+      const lastDoc = await this.clipsCollection
+        .doc(last_doc_id)
+        .get()
+        .toPromise();
+      query = query.startAfter(lastDoc);
+    }
+    const data = await query.get();
+    const clips = data.docs.map((doc) => doc.data() as IClip);
+    this.pageClips = [...this.pageClips, ...clips];
+    console.log('page clips', this.pageClips);
+    this.pendingRequest = false;
   }
 }

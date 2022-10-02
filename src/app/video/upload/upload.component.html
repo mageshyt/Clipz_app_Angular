@@ -2,10 +2,10 @@
   <div class="bg-[#283046] flex-1 mt-10 max-w-[1500px] p-4 mx-4 relative">
     <span class="text-xl font-semibold text-white"> uploads video </span>
     <div class="mt-6">
-       <!-- uploads video -->
-    <app-alert *ngIf="alert.show" [color]="alert.alertColor">
-      {{ alert.message }}
-    </app-alert>
+      <!-- uploads video -->
+      <app-alert *ngIf="alert.show" [color]="alert.alertColor">
+        {{ alert.message }}
+      </app-alert>
       <!-- upload asset -->
       <div
         *ngIf="!file; else formTemplate"
@@ -55,7 +55,7 @@
         </div>
         <ng-template #screen_short>
           <div
-            class="flex flex-col select-none lg:flex-row justify-evenly mt-4"
+            class="flex flex-col items-center select-none lg:flex-row justify-evenly mt-4"
           >
             <div *ngFor="let img of images">
               <img

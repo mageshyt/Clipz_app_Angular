@@ -2,11 +2,10 @@
   class="grid 2xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 place-items-center gap-y-14 mt-4 pb-20"
 >
   <app-game-card
-  
-    *ngFor="let game of gameDetails"
-    [postedBY]="game.postedBY"
-    [gameTitle]="game.gameTitle"
-    [gameImage]="game.gameImage"
-    [UploadedDate]="game.UploadedDate"
+    *ngFor="let clip of this.clip.pageClips"
+    [postedBY]="clip.displayName"
+    [gameTitle]="clip.title"
+    [gameImage]="clip.thumbnail"
+    [UploadedDate]="clip.timeStamp"
   ></app-game-card>
 </div>
