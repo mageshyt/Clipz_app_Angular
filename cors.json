@@ -1,0 +1,9 @@
+[
+  {
+    "origin": ["*"],
+    "responseHeaders": ["Content-Security-Policy"],
+    "method": ["GET"],
+    "maxAgeSeconds": 3600
+    
+  }
+]

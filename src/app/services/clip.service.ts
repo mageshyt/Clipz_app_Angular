@@ -19,6 +19,7 @@ export interface IClip {
   fileName: string;
   thumbnail: string;
   screen_short_name: string;
+  docID?: string;
 }
 
 @Injectable({
@@ -38,7 +39,8 @@ export class ClipService {
     this.clipsCollection = db.collection('clips');
   }
   createClip = async (data: IClip) => {
-    return this.clipsCollection.add(data);
+    const docId = data.fileName.replace('.mp4', '');
+    return this.clipsCollection.doc(docId).set(data);
   };
   //! function to get all the clips from firebase
   public get_user_Clips = async (): Promise<IClip[]> => {
@@ -92,23 +94,28 @@ export class ClipService {
 
   // ! get clips
   public async getClips() {
-    console.log('start');
     if (this.pendingRequest) return;
     this.pendingRequest = true;
+
     let query = this.clipsCollection.ref.orderBy('timeStamp', 'desc').limit(6);
     const { length } = this.pageClips;
     if (length) {
-      const last_doc_id = this.pageClips[length - 1].fileName;
-      const lastDoc = await this.clipsCollection
+      console.log('last doc id', this.pageClips);
+
+      const last_doc_id = this.pageClips[length - 1].fileName.replace(
+        '.mp4',
+        ''
+      );
+      const last_doc = await this.clipsCollection
         .doc(last_doc_id)
         .get()
         .toPromise();
-      query = query.startAfter(lastDoc);
+      query = query.startAfter(last_doc); // start After 
     }
     const data = await query.get();
     const clips = data.docs.map((doc) => doc.data() as IClip);
     this.pageClips = [...this.pageClips, ...clips];
-    console.log('page clips', this.pageClips);
+    console.log('page clips', this.pageClips[0].docID);
     this.pendingRequest = false;
   }
 }

@@ -149,13 +149,14 @@ export class UploadComponent implements OnDestroy {
           //! create the doc
           const res: any = await this.clip_service
             .createClip(uploadDoc)
-            .then((res) => {
+            .then((res: any) => {
+              const docId = uploadDoc.fileName.replace('.mp4', '');
               //! update the info in the firebase database
               this.alert.message = 'Video uploaded successfully 🥰';
               this.submitting = false;
               this.alert.alertColor = 'green';
               setTimeout(() => {
-                this.route.navigate(['/', 'clip', res?.id]);
+                this.route.navigate(['/', 'clip', docId]);
               }, 1000);
             });
         },

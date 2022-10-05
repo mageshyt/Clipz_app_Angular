@@ -6,7 +6,7 @@ import { filter, pipe } from 'rxjs';
   selector: 'app-game-card',
   templateUrl: './game-card.component.html',
   styleUrls: ['./game-card.component.scss'],
-})
+}) 
 export class GameCardComponent implements OnInit {
   @Input() gameTitle?: String;
   @Input() gameImage?: String;
@@ -20,6 +20,7 @@ export class GameCardComponent implements OnInit {
   ngOnInit(): void {
     // console.log(this.gameDay, new Date(this.UploadedDate));
     // this.gameDay = new Date(this.UploadedDate);
+    console.log(this.UploadedDate);
   }
 
   onclick(game_title: String | undefined) {
