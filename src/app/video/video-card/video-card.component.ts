@@ -17,7 +17,7 @@ export class VideoCardComponent implements OnInit {
   }
 
   constructor(private modal: ModalService, private clip: ClipService) {
-    console.log('video card', this.videoData);
+    console.log('video card', this.imgUrl);
   }
 
   ngOnInit(): void {}

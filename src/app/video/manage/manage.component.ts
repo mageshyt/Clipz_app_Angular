@@ -12,7 +12,7 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./manage.component.scss'],
 })
 export class ManageComponent implements OnInit {
-  gameDetails: any = games;
+  gameDetails: IClip[] = [];
   sort$?: BehaviorSubject<string>;
 
   videoOrder: string = '1';

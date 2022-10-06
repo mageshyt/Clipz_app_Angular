@@ -6,7 +6,7 @@
     <app-video-card
       *ngFor="let game of gameDetails"
       [title]="game.title"
-      [imgUrl]="game.imgUrl"
+      [imgUrl]="game.thumbnail"
       [videoData]="game"
       (openModal)="openModal($event)"
       (onDelete)="onDelete($event)"

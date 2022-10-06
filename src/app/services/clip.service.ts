@@ -85,11 +85,13 @@ export class ClipService {
 
   //! get video link
   public async getVideoLink(video_id: string) {
-    const currentUser = await this.userAuth.currentUser;
-    const query = await this.clipsCollection.doc(video_id).ref.get();
-    const data = query.data() as IClip;
-    console.log(data);
-    return data.url;
+    const query = await this.clipsCollection.ref
+      .where('title', '==', video_id)
+      .get();
+    const data = query.docs.map((doc) => doc.data() as IClip);
+    console.log({ data, video_id });
+    return data[0].url;
+    
   }
 
   // ! get clips
@@ -110,7 +112,7 @@ export class ClipService {
         .doc(last_doc_id)
         .get()
         .toPromise();
-      query = query.startAfter(last_doc); // start After 
+      query = query.startAfter(last_doc); // start After
     }
     const data = await query.get();
     const clips = data.docs.map((doc) => doc.data() as IClip);

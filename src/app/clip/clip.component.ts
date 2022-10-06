@@ -11,7 +11,10 @@ import { ClipService } from '../services/clip.service';
 })
 export class ClipComponent implements OnInit, DoCheck {
   games_asset: Games[] = games;
-  constructor(private route: ActivatedRoute, private clip: ClipService) {}
+  constructor(private route: ActivatedRoute, private clip: ClipService) {
+    this.game_title = this.route.snapshot.params['id'];
+    console.log(this.game_title);
+  }
   game_title: string = '';
   video_url: string = '';
   ngOnInit(): void {
@@ -19,10 +22,11 @@ export class ClipComponent implements OnInit, DoCheck {
     this.clip.getVideoLink(this.game_title).then((data) => {
       this.video_url = data;
     });
-    console.log(this.video_url);
+    console.log({ urL: this.video_url });
   }
   //! this will check when again route change
   ngDoCheck(): void {
     this.game_title = this.route.snapshot.params['id'];
+ 
   }
 }
