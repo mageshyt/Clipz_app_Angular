@@ -32,4 +32,8 @@ export class VideoCardComponent implements OnInit {
     this.clip.deleteClip(clip);
     this.onDelete.emit(clip);
   }
+  copyLink($event: any, clip: IClip) {
+    $event.preventDefault();
+    console.log('copy link', clip);
+  }
 }

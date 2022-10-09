@@ -15,7 +15,7 @@ export interface IClip {
   title: string;
   displayName: string;
   url: string;
-  timeStamp: firebase.firestore.FieldValue;
+  timeStamp: firebase.firestore.FieldValue  ;
   fileName: string;
   thumbnail: string;
   screen_short_name: string;
@@ -84,14 +84,10 @@ export class ClipService {
   };
 
   //! get video link
-  public async getVideoLink(video_id: string) {
-    const query = await this.clipsCollection.ref
-      .where('title', '==', video_id)
-      .get();
-    const data = query.docs.map((doc) => doc.data() as IClip);
-    console.log({ data, video_id });
-    return data[0].url;
-    
+  public async getVideoDetail(video_id: string) {
+    const query = await this.clipsCollection.ref.doc(video_id).get();
+    const data = query.data() as IClip;
+    return data;
   }
 
   // ! get clips

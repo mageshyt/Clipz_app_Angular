@@ -17,6 +17,7 @@ import { VideoModule } from './video/video.module';
 import { ClipComponent } from './clip/clip.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import firebase from 'firebase/compat';
+import { FbTimestampPipe } from './pipes/fb-timestamp.pipe';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import firebase from 'firebase/compat';
     AboutComponent,
     ClipComponent,
     NotFoundComponent,
+    FbTimestampPipe,
   ],
   imports: [
     BrowserModule,
