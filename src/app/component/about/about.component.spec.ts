@@ -1,23 +1,28 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { AboutComponent } from './about.component';
 
-describe('AboutComponent', () => {
-  let component: AboutComponent;
+describe('About component', () => {
   let fixture: ComponentFixture<AboutComponent>;
-
+  let component: AboutComponent;
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ AboutComponent ]
-    })
-    .compileComponents();
+    TestBed.configureTestingModule({
+      declarations: [AboutComponent],
+    }).compileComponents();
+  });
 
+  beforeEach(() => {
     fixture = TestBed.createComponent(AboutComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('Should create ', () => {
     expect(component).toBeTruthy();
+  });
+  it('text inner text of the container', () => {
+    const text = fixture.nativeElement.querySelector('.container').textContent;
+    expect(text).toContain(
+      'This is a basic about page to demonstrate basic routing capabilities.'
+    );
   });
 });
