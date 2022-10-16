@@ -5,17 +5,22 @@ import {
   AngularFirestoreCollection,
 } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { switchMap } from 'rxjs/operators';
-import { of } from 'rxjs';
 import { AuthService } from './auth.service';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-
+import {
+  ActivatedRoute,
+  ActivatedRouteSnapshot,
+  Resolve,
+  Router,
+  RouterStateSnapshot,
+} from '@angular/router';
+import { map } from 'rxjs/operators';
 export interface IClip {
   uid: string;
   title: string;
   displayName: string;
   url: string;
-  timeStamp: firebase.firestore.FieldValue  ;
+  timeStamp: firebase.firestore.FieldValue;
   fileName: string;
   thumbnail: string;
   screen_short_name: string;
@@ -25,16 +30,18 @@ export interface IClip {
 @Injectable({
   providedIn: 'root',
 })
-export class ClipService {
+export class ClipService implements Resolve<IClip | null> {
   pageClips: IClip[] = [];
   pendingRequest = false;
 
   public clipsCollection: AngularFirestoreCollection<IClip | null>;
+
   constructor(
     private db: AngularFirestore,
     private auth: AngularFireAuth,
     private userAuth: AuthService,
-    private storage: AngularFireStorage
+    private storage: AngularFireStorage,
+    private router: Router
   ) {
     this.clipsCollection = db.collection('clips');
   }
@@ -115,5 +122,24 @@ export class ClipService {
     this.pageClips = [...this.pageClips, ...clips];
     console.log('page clips', this.pageClips[0].docID);
     this.pendingRequest = false;
+  }
+
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    const id = route.paramMap.get('id');
+    return this.clipsCollection
+      .doc(id as string)
+      .get()
+      .pipe(
+        map((snapshot) => {
+          const data = snapshot.data();
+
+          if (!data) {
+            this.router.navigate(['/']);
+            return null;
+          }
+
+          return data;
+        })
+      );
   }
 }

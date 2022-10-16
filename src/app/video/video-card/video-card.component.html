@@ -7,10 +7,15 @@
     <!-- Body -->
     <div class="p-4 text-2xl w-full items-center flex">
       <!-- Link -->
-      <span class="font-semibold flex-1 mb-2"> {{ title }}</span>
+      <span
+        [routerLink]="['/', 'clip', videoData.docID]"
+        class="font-semibold flex-1 mb-2"
+      >
+        {{ title }}</span
+      >
       <span
         class="bg-gray-400 cursor-copy text-white px-2 py-1 h-7 ml-2 text-sm rounded"
-
+        (click)="copyLink($event, videoData)"
       >
         Copy Link
       </span>

@@ -1,6 +1,5 @@
 import { ActivatedRoute } from '@angular/router';
 import {
-  AfterContentInit,
   Component,
   DoCheck,
   ElementRef,
@@ -8,7 +7,6 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { games } from 'src/assets/data';
 import { Games } from '../component/game-clips/game-clips.component';
 import { ClipService, IClip } from '../services/clip.service';
 import { DatePipe } from '@angular/common';
@@ -37,8 +35,15 @@ export class ClipComponent implements OnInit, DoCheck {
     console.log('clip component');
     this.game_id = this.route.snapshot.params['id'];
     this.player = videojs(this.target?.nativeElement);
-    this.clip.getVideoDetail(this.game_id).then((data) => {
-      this.game_details = data;
+    // this.clip.getVideoDetail(this.game_id).then((data) => {
+    //   this.game_details = data;
+    //   this.player?.src({
+    //     src: this.game_details.url,
+    //   });
+    // });
+
+    this.route.data.subscribe((data) => {
+      this.game_details = data['clip'];
       this.player?.src({
         src: this.game_details.url,
       });

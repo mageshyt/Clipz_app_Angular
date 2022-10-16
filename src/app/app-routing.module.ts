@@ -4,6 +4,7 @@ import { ClipComponent } from './clip/clip.component';
 import { AboutComponent } from './component/about/about.component';
 import { HomeComponent } from './component/home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { ClipService } from './services/clip.service';
 import { ManageComponent } from './video/manage/manage.component';
 
 const routes: Routes = [
@@ -18,7 +19,18 @@ const routes: Routes = [
   {
     path: 'clip/:id',
     component: ClipComponent,
+    resolve: {
+      clip: ClipService,
+    },
+    //! lazy load for clip component
+    loadChildren: () => import('./clip/clip.module').then((m) => m.ClipModule),
   },
+  {
+    path: '',
+    loadChildren: () =>
+      import('./video/video.module').then((m) => m.VideoModule),
+  },
+
   {
     //! wildcard route
     path: '**',
