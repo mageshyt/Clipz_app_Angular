@@ -23,6 +23,7 @@ export class GameCardComponent implements OnInit {
 
   onclick(game_title: String | undefined) {
     // console.log(game_title);
+
     this.route.navigate(['clip', game_title]);
   }
 }

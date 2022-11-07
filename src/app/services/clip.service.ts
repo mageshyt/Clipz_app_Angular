@@ -71,4 +71,12 @@ export class ClipService {
     const res2 = this.storage.ref(`clips/${clipId}`).delete();
     return Promise.all([res1, res2]);
   };
+
+  public getVideoDetail=async (clipId:string)=>{
+//! get all doc
+    const query = await this.clipsCollection.ref
+    query.get().then((data)=>{
+      console.log('data',data.docs[0].data())
+    })
+  }
 }

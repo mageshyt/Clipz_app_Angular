@@ -11,6 +11,7 @@ export class VideoCardComponent implements OnInit {
   @Input() title?: string;
   @Input() videoData: any;
   @Output() openModal: EventEmitter<IClip> = new EventEmitter();
+
   edit($event: any) {
     console.log('edit', $event);
   }

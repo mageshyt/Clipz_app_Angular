@@ -28,7 +28,6 @@ import firebase from 'firebase/compat';
     HomeComponent,
     AboutComponent,
     ClipComponent,
-    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
