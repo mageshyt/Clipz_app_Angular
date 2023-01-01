@@ -31,7 +31,6 @@ export class UploadComponent implements OnDestroy {
   constructor(
     private storage: AngularFireStorage,
     private auth: AngularFireAuth,
-    private db: AngularFirestore,
     private clip_service: ClipService,
     private route: Router,
     public FfmpegService: FfmpegService
@@ -43,7 +42,7 @@ export class UploadComponent implements OnDestroy {
     this.FfmpegService.load();
   }
   isDrageOver: boolean = false; // it helps to check if the file  hover or not
-  
+
   //! current user
   user: any;
   ngOnDestroy(): void {

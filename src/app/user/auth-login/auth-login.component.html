@@ -50,7 +50,7 @@
   <!-- Errors password-->
   <p
     *ngIf="password.errors && password.touched"
-    class="text-red-500 text-sm font-bold mb-2"
+    class="text-red-500  text-sm font-bold mb-2"
   >
     Password must be at least 8 characters, contain at least one lowercase
     letter
@@ -64,7 +64,7 @@
       ' cursor-not-allowed disabled:opacity-60 ':
         LoginForm.invalid || LoginForm.pending || LoginForm.disabled
     }"
-    class="mt-4 w-full border border-indigo-400 disabled:cursor-not-allowed p-2 transition-all transform duration-200 hover:bg-indigo-400"
+    class="mt-4 w-full submit_btn border border-indigo-400 disabled:cursor-not-allowed p-2 transition-all transform duration-200 hover:bg-indigo-400"
   >
     Sign In
   </button>

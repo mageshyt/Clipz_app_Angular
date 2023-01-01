@@ -1,43 +1,28 @@
-// ***********************************************
-// This example namespace declaration will help
-// with Intellisense and code completion in your
-// IDE or Text Editor.
-// ***********************************************
-// declare namespace Cypress {
-//   interface Chainable<Subject = any> {
-//     customCommand(param: any): typeof customCommand;
-//   }
-// }
-//
-// function customCommand(param: any): void {
-//   console.warn(param);
-// }
-//
-// NOTE: You can use it like so:
-// Cypress.Commands.add('customCommand', customCommand);
-//
-// ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add("login", (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add("drag", { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add("dismiss", { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+// create chainable
+
+declare namespace Cypress {
+  interface Chainable {
+    loginToApp(email: string, password: string): void;
+    clickNavBtn(label: string): void;
+  }
+}
+
+Cypress.Commands.add('loginToApp', (email, password) => {
+  // check if login button is visible
+  cy.get('.login_btn').should('be.visible');
+  // click on login button
+
+  cy.get('.login_btn').wait(1500).click();
+  // fill the form
+  cy.get('input[name=email]').type('demo@demo.com');
+  cy.get('input[name=password]').type('demodemo');
+
+  // click on login button
+  cy.get('.submit_btn').wait(1500).click();
+});
+
+// ! to click nav btn
+
+Cypress.Commands.add('clickNavBtn', (label) => {
+  cy.contains(label).wait(1500).click();
+});

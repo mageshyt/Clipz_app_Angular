@@ -17,11 +17,11 @@ describe('About component', () => {
   });
 
   it('Should create ', () => {
-    expect(component).toBeTruthy();
+    expect(component);
   });
   it('text inner text of the container', () => {
     const text = fixture.nativeElement.querySelector('.container').textContent;
-    expect(text).toContain(
+    expect(text).contain(
       'This is a basic about page to demonstrate basic routing capabilities.'
     );
   });

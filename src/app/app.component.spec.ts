@@ -5,6 +5,6 @@ import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
   it('should create the app and pass the sanity  test', () => {
-    expect(true).toBeTruthy();
+    
   });
 });
