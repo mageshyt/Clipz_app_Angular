@@ -5,7 +5,7 @@
       >Clipz</a
     >
     <!-- Nav items -->
-    <div class="md:flex flex-row space-x-3 text-gray-300 flex-1 hidden">
+    <div class="md:flex nav-items flex-row space-x-3 text-gray-300 flex-1 hidden">
       <span
         *ngIf="!isAuthenticated; else authLinks"
         (click)="showAuthModal()"
@@ -33,7 +33,7 @@
         <span
           routerLinkActive="text-indigo-400"
           (click)="logout($event)"
-          class="cursor-pointer transform transition-all duration-200 hover:scale-110"
+          class="cursor-pointer transform transition-all duration-200 logout-btn hover:scale-110"
           >Logout</span
         >
       </ng-template>

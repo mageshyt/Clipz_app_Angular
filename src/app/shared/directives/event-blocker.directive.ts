@@ -7,7 +7,6 @@ export class EventBlockerDirective {
   @HostListener('drop', ['$event'])
   @HostListener('dragover', ['$event'])
   public handleEvent(event: Event) {
-    console.log('event blocked');
     event.preventDefault();
     event.stopPropagation();
   }

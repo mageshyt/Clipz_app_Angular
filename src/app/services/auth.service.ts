@@ -29,6 +29,7 @@ interface userCollection {
   providedIn: 'root',
 })
 export class AuthService {
+
   public isAuthenticated$!: Observable<boolean>;
   public isAuthenticatedWithDelay$!: Observable<boolean>;
   private redirect: boolean = false;

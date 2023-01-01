@@ -43,7 +43,7 @@ export class UploadComponent implements OnDestroy {
     this.FfmpegService.load();
   }
   isDrageOver: boolean = false; // it helps to check if the file  hover or not
-
+  
   //! current user
   user: any;
   ngOnDestroy(): void {
