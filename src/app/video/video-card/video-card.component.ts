@@ -11,23 +11,36 @@ export class VideoCardComponent implements OnInit {
   @Input() title?: string;
   @Input() videoData: any;
   @Output() openModal: EventEmitter<IClip> = new EventEmitter();
+<<<<<<< HEAD
 
+=======
+  @Output() onDelete: EventEmitter<IClip> = new EventEmitter();
+>>>>>>> a2aa9eae7236f676aa4f89b98157f375577181e0
   edit($event: any) {
     console.log('edit', $event);
   }
 
-  constructor(private modal: ModalService, private clip: ClipService) {}
+  constructor(private modal: ModalService, private clip: ClipService) {
+    console.log('video card', this.imgUrl);
+  }
 
   ngOnInit(): void {}
-
   showVideoModal($event: any, clip: IClip) {
     $event.preventDefault();
     this.openModal.emit(clip);
   }
 
-  delete($event: any, clipId: string) {
+  delete($event: any, clip: IClip) {
     $event.preventDefault();
     // console.log('delete', clipId);
-    this.clip.deleteClip(clipId);
+    this.clip.deleteClip(clip);
+    this.onDelete.emit(clip);
+  }
+  async copyLink($event: Event, clip: IClip) {
+    $event.preventDefault();
+    const docId = clip.fileName.replace('.mp4', '');
+    //! copy link to clipboard
+    const link = `http://localhost:4200/clip/${docId}`;
+    await navigator.clipboard.writeText(link);
   }
 }

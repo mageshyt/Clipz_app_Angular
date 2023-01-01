@@ -1,5 +1,5 @@
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Games } from 'src/app/component/game-clips/game-clips.component';
 import { ClipService, IClip } from 'src/app/services/clip.service';
@@ -12,7 +12,7 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./manage.component.scss'],
 })
 export class ManageComponent implements OnInit {
-  gameDetails: any = games;
+  gameDetails: IClip[] = [];
   sort$?: BehaviorSubject<string>;
 
   videoOrder: string = '1';
@@ -28,14 +28,23 @@ export class ManageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const res = this.clip.getClips().then((data) => {
+    const res = this.clip.get_user_Clips().then((data) => {
       this.gameDetails = data;
+<<<<<<< HEAD
       
+=======
+>>>>>>> a2aa9eae7236f676aa4f89b98157f375577181e0
     });
   }
+
   activeClip: IClip | undefined;
   openModal($clip: IClip) {
     this.modal.toggleModal('video');
     this.activeClip = $clip;
+  }
+  onDelete($clip: IClip) {
+    this.gameDetails = this.gameDetails.filter((clip: IClip) => {
+      return clip.fileName !== $clip.fileName;
+    });
   }
 }

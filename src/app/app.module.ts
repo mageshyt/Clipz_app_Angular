@@ -13,10 +13,9 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { HomeComponent } from './component/home/home.component';
 import { AboutComponent } from './component/about/about.component';
-import { VideoModule } from './video/video.module';
 import { ClipComponent } from './clip/clip.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import firebase from 'firebase/compat';
+import { FbTimestampPipe } from './pipes/fb-timestamp.pipe';
 
 @NgModule({
   declarations: [
@@ -28,13 +27,13 @@ import firebase from 'firebase/compat';
     HomeComponent,
     AboutComponent,
     ClipComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
     UserModule,
     AngularFirestoreModule,
     AngularFireModule.initializeApp(environment.firebase),
-    VideoModule,
     AppRoutingModule,
     AngularFirestoreModule,
   ],

@@ -20,9 +20,14 @@
     "@angular/platform-browser-dynamic": "^14.1.0",
     "@angular/router": "^14.1.0",
     "@ffmpeg/core": "^0.11.0",
+    "@ffmpeg/ffmpeg": "^0.11.5",
+    "@ngneat/tailwind": "^7.0.3",
     "@types/node": "^18.7.23",
+    "@types/video.js": "^7.3.48",
+    "@videojs/themes": "^1.0.1",
     "glob": "^8.0.3",
     "ngx-mask": "^14.0.3",
+    "ngx-spinner": "^14.0.0",
     "rxjs": "~7.5.0",
     "tailwind-scrollbar-hide": "^1.1.7",
     "tslib": "^2.3.0",
@@ -44,6 +49,7 @@
     "karma-jasmine-html-reporter": "~2.0.0",
     "postcss": "^8.4.16",
     "tailwindcss": "^3.1.8",
-    "typescript": "~4.7.2"
+    "typescript": "~4.7.2",
+    "video.js": "^7.20.3"
   }
 }

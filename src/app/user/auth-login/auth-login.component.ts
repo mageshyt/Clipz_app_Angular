@@ -38,7 +38,7 @@ export class AuthLoginComponent implements OnInit {
       return;
     }
     console.log('logged in');
-    this.alertColor = 'green';
+    this.alertColor = 'blue';
     this.alertMessage = 'Login Successful 🥰';
   }
 }

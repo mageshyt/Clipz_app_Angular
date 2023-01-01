@@ -1,14 +1,22 @@
 <div
-  class="h-[450px] my-2 s flex-col justify-between w-[420px] md:w-[450px] flex bg-[#283046] rounded-md"
+  class="h-[450px] my-2 flex-col justify-between w-[420px] md:w-[450px] flex bg-[#283046] rounded-md"
 >
   <!-- image -->
-  <div class="h-auto">
-    <img [src]="imgUrl" class="rounded-t-md" />
+  <div class="">
+    <img [src]="imgUrl" class="rounded-t-md h-auto" crossorigin />
     <!-- Body -->
     <div class="p-4 text-2xl w-full items-center flex">
       <!-- Link -->
-      <span class="font-semibold flex-1 mb-2"> {{ title }}</span>
-      <span class="bg-gray-400 text-white px-2 py-1 h-7 ml-2 text-sm rounded">
+      <span
+        [routerLink]="['/', 'clip', videoData.docID]"
+        class="font-semibold flex-1 mb-2"
+      >
+        {{ title }}</span
+      >
+      <span
+        class="bg-gray-400 cursor-copy text-white px-2 py-1 h-7 ml-2 text-sm rounded"
+        (click)="copyLink($event, videoData)"
+      >
         Copy Link
       </span>
     </div>
@@ -22,7 +30,7 @@
       <span class="material-icons text-base">build</span>
     </span>
     <span
-      (click)="delete($event, videoData.fileName)"
+      (click)="delete($event, videoData)"
       class="flex-1 p-2 rounded-br-2xl transition cursor-pointer hover:text-indigo-400"
     >
       <span class="material-icons text-base">delete</span>
