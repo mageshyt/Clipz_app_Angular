@@ -24,11 +24,8 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-<<<<<<< HEAD
-=======
               "src/favicon.ico",
               "src/assets",
->>>>>>> a2aa9eae7236f676aa4f89b98157f375577181e0
               {
                 "input": "node_modules/@ffmpeg/core/dist",
                 "output": "node_modules/@ffmpeg/core/dist",

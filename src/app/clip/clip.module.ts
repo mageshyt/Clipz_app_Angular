@@ -5,8 +5,6 @@ import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [],
-  imports: [
-    CommonModule
-  ]
+  imports: [CommonModule],
 })
-export class ClipModule { }
+export class ClipModule {}

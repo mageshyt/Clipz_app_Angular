@@ -30,10 +30,6 @@ export class ManageComponent implements OnInit {
   ngOnInit(): void {
     const res = this.clip.get_user_Clips().then((data) => {
       this.gameDetails = data;
-<<<<<<< HEAD
-      
-=======
->>>>>>> a2aa9eae7236f676aa4f89b98157f375577181e0
     });
   }
 

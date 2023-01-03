@@ -90,14 +90,6 @@ export class ClipService implements Resolve<IClip | null> {
     return Promise.all([res1, res2, res3]);
   };
 
-<<<<<<< HEAD
-  public getVideoDetail=async (clipId:string)=>{
-//! get all doc
-    const query = await this.clipsCollection.ref
-    query.get().then((data)=>{
-      console.log('data',data.docs[0].data())
-    })
-=======
   //! get video link
   public async getVideoDetail(video_id: string) {
     const query = await this.clipsCollection.ref.doc(video_id).get();
@@ -149,6 +141,5 @@ export class ClipService implements Resolve<IClip | null> {
           return data;
         })
       );
->>>>>>> a2aa9eae7236f676aa4f89b98157f375577181e0
   }
 }

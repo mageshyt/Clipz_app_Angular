@@ -94,11 +94,6 @@ export class UploadComponent implements OnDestroy {
 
     const randomFileName = uuidv4();
     const clipPath = `clips/${randomFileName}.mp4`;
-<<<<<<< HEAD
-
-    console.log(clipPath, this.file);
-=======
->>>>>>> a2aa9eae7236f676aa4f89b98157f375577181e0
     this.task = this.storage.upload(clipPath, this.file); //! upload the file to firebase storage
     const clipRef = this.storage.ref(clipPath);
 
@@ -175,11 +170,7 @@ export class UploadComponent implements OnDestroy {
       });
   }
 
-<<<<<<< HEAD
-  onDrop(event: any) {
-=======
   async onDrop(event: any) {
->>>>>>> a2aa9eae7236f676aa4f89b98157f375577181e0
     this.isDrageOver = false;
     this.file = event.dataTransfer
       ? event.dataTransfer.files[0]
