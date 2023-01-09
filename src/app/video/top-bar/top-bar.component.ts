@@ -19,7 +19,6 @@ export class TopBarComponent implements OnInit {
 
   sort(event: Event) {
     const { value } = event?.target as HTMLInputElement;
-    console.log(value);
     //! method one
     // this.router.navigateByUrl(`/manage?sort=${value}`);
     //! method two
@@ -27,5 +26,6 @@ export class TopBarComponent implements OnInit {
       relativeTo: this.route,
       queryParams: { sort: value },
     });
+    
   }
 }
