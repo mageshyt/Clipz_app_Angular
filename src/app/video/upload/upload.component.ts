@@ -175,6 +175,7 @@ export class UploadComponent implements OnDestroy {
       ? event.dataTransfer.files[0]
       : event.target.files[0];
     //! only it should be mp4
+    console.log(this.file);
     if (!this.file || this.file.type !== 'video/mp4') {
       this.file = null;
       return;

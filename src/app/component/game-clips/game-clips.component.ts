@@ -1,6 +1,5 @@
 import { ClipService, IClip } from './../../services/clip.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FbTimestampPipe } from 'src/app/pipes/fb-timestamp.pipe';
 import { DatePipe } from '@angular/common';
 export interface Games {
   gameTitle: string;
