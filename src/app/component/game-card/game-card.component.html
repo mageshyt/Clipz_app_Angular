@@ -2,7 +2,6 @@
   class="bg-[#283046] md:w-[500px] w-[450px] rounded-md h-[470px] transform transition-all duration-200 hover:scale-105 cursor-pointer"
   (click)="onclick()"
 >
- <h1>hello</h1>
   <img
     [src]="gameImage"
     crossorigin
@@ -22,7 +21,7 @@
         {{ postedBY }}
       </span>
       <span class="text-gray-500">
-        {{ UploadedDate  }}
+        {{ UploadedDate | fbTimestamp }}
       </span>
     </div>
   </div>

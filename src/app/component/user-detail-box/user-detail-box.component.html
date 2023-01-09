@@ -1,0 +1,29 @@
+<div
+  *ngIf="owner"
+  class="flex items-center bg-secondary space-x-4 w-full p-3 h-[60px] mt-4 rounded-md"
+>
+  <!-- user  logo -->
+  <div class="flex items-center space-x-4">
+    <img
+      class="w-10 h-10 rounded-full border-green-400 border-[2px]"
+      [src]="
+        'https://avatars.dicebear.com/api/pixel-art/' +
+        this.owner?.name +
+        '.svg;'
+      "
+      crossorigin
+    />
+    <!-- name -->
+    <span class="text-white font-semibold">
+      {{ owner.name }}
+    </span>
+  </div>
+
+  <!-- subscribe -->
+
+  <div class="flex items-center space-x-4">
+    <button class="bg-gray-700 p-2 rounded-md text-white font-semibold">
+      Subscribe
+    </button>
+  </div>
+</div>
