@@ -16,7 +16,7 @@ export class GameCardComponent implements OnInit {
   @Input() postedBY?: String;
 
   @Input() gameID?: String;
-  constructor(private route: Router ) {}
+  constructor(private route: Router) {}
 
   ngOnInit(): void {}
 

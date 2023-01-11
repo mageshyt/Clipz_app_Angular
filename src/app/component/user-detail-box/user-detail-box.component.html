@@ -1,6 +1,6 @@
 <div
   *ngIf="owner"
-  class="flex items-center bg-secondary space-x-4 w-full p-3 h-[60px] mt-4 rounded-md"
+  class="flex mx-3 items-center bg-secondary space-x-4 p-3 h-[60px] mt-4 rounded-md"
 >
   <!-- user  logo -->
   <div class="flex items-center space-x-4">
@@ -22,8 +22,18 @@
   <!-- subscribe -->
 
   <div class="flex items-center space-x-4">
-    <button class="bg-gray-700 p-2 rounded-md text-white font-semibold">
-      Subscribe
-    </button>
+    <button [ngClass]="style.subscribe_btn">Subscribe</button>
+  </div>
+
+  <!-- reactions -->
+  <div class="flex items-center space-x-3">
+    <!-- like -->
+    <span (click)="like()" [ngClass]="style.reaction_btn"> thumb_up </span>
+
+    <!-- dislike -->
+    <span [ngClass]="style.reaction_btn"> thumb_down </span>
+
+    <!-- share -->
+    <span [ngClass]="style.reaction_btn"> share </span>
   </div>
 </div>

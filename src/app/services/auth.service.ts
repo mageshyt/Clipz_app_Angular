@@ -18,11 +18,12 @@ interface userLogin {
   password: string;
 }
 
-interface userCollection {
+export interface userCollection {
   email: string;
   name: string;
   age: number;
   phone: string;
+  video_likes: string[];
 }
 
 @Injectable({
@@ -77,6 +78,7 @@ export class AuthService {
       name: data.name,
       age: data.age,
       phone: data.phoneNumber,
+      video_likes: [],
     });
 
     //! update the user profile with name
