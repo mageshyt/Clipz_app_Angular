@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-user-detail-box',
@@ -11,11 +12,12 @@ export class UserDetailBoxComponent implements OnInit {
   avatar: string = '';
 
   getUserAvatar() {
-    
-   this.avatar=
-      'https://avatars.dicebear.com/api/pixel-art/' + this.owner?.name + '.svg;'
+    this.avatar =
+      'https://avatars.dicebear.com/api/pixel-art/' +
+      this.owner?.name +
+      '.svg;';
   }
-  constructor() {}
+  constructor(private toast: ToastrService) {}
 
   ngOnInit(): void {}
 }

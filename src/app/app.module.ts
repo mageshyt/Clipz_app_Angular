@@ -17,6 +17,8 @@ import { ClipComponent } from './clip/clip.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { FbTimestampPipe } from './pipes/fb-timestamp.pipe';
 import { UserDetailBoxComponent } from './component/user-detail-box/user-detail-box.component';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,8 @@ import { UserDetailBoxComponent } from './component/user-detail-box/user-detail-
     AngularFireModule.initializeApp(environment.firebase),
     AppRoutingModule,
     AngularFirestoreModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],
