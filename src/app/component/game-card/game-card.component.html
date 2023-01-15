@@ -1,13 +1,15 @@
 <div
-  class="bg-[#283046] md:w-[500px] w-[450px] rounded-md h-[470px] transform transition-all duration-200 hover:scale-105 cursor-pointer"
+  class="bg-[#283046] justify-between flex flex-col md:w-[450px] w-[350px] h-[300px] rounded-md md:h-[450px] transform transition-all duration-200 hover:scale-105 cursor-pointer"
   (click)="onclick()"
 >
-  <img
-    [src]="gameImage"
-    crossorigin
-    alt="game-image"
-    class="rounded-t-lg game-image h-[300px] w-full"
-  />
+  <div>
+    <img
+      [src]="gameImage"
+      crossorigin
+      alt="game-image"
+      class="rounded-t-lg game-image object-cover w-full"
+    />
+  </div>
   <!-- about the clip -->
   <div class="flex justify-center mx-10 my-2 flex-col">
     <!-- title -->
