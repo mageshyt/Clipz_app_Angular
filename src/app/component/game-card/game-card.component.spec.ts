@@ -16,7 +16,7 @@ import { Component } from '@angular/core';
 
 })
 export class MockCardComponent {
-  constructor(public router: Router) {}
+  constructor(public router: Router) { }
 
 
 }
@@ -26,8 +26,8 @@ describe('Game-card ', () => {
   let fixture: ComponentFixture<MockCardComponent>;
   let component: MockCardComponent;
 
-  beforeEach(async () => {
-    
+beforeEach(async () => {
+
     TestBed.configureTestingModule({
       declarations: [GameCardComponent, MockCardComponent],
     }).compileComponents();
@@ -41,7 +41,7 @@ describe('Game-card ', () => {
   });
 
   it('should create Component', () => {
-    
+
     expect(component).toBeTruthy();
   });
   // check title rendered or not
