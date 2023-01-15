@@ -14,7 +14,7 @@ export const environment = {
     measurementId: 'G-VZP5GSLPFV',
   },
   production: false,
-  BaseUrl: "https://clipz-app-angular.vercel.app/"
+  BaseUrl: 'https://vercel.com/mageshyt/clipz-app-angular',
 };
 
 /*

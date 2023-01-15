@@ -42,6 +42,5 @@ export class GameClipsComponent implements OnInit, OnDestroy {
 
   getClips = async () => {
     const res = await this.clip.getClips();
-    
   };
 }

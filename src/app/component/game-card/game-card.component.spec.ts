@@ -1,56 +1,47 @@
-import { By } from '@angular/platform-browser';
+/* tslint:disable:no-unused-variable */
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { GameCardComponent } from './game-card.component';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Router } from '@angular/router';
-import { Component } from '@angular/core';
+import { DatePipe } from '@angular/common';
+import { FbTimestampPipe } from 'src/app/pipes/fb-timestamp.pipe';
 
+describe('GameCardComponent', () => {
+  let component: GameCardComponent;
+  let fixture: ComponentFixture<GameCardComponent>;
 
-
-@Component({
-  selector: 'app-mock-card',
-  template: ` 
-  <div class="app-mock-card">
-  <app-game-card gameTitle="testing"> </app-game-card> 
-  </div>
-  `
-
-})
-export class MockCardComponent {
-  constructor(public router: Router) { }
-
-
-}
-
-
-describe('Game-card ', () => {
-  let fixture: ComponentFixture<MockCardComponent>;
-  let component: MockCardComponent;
-
-beforeEach(async () => {
-
+  beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [GameCardComponent, MockCardComponent],
+      declarations: [GameCardComponent],
     }).compileComponents();
-  });
+  }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MockCardComponent);
+    fixture = TestBed.createComponent(GameCardComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    component.gameTitle = 'test';
+    component.gameImage = 'assets/img/1.jpg';
+    component.UploadedDate = new Date();
+    component.postedBY = 'Magesh yt';
+    component.gameID = '2';
 
+    fixture.detectChanges();
   });
 
-  it('should create Component', () => {
-
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
-  // check title rendered or not
 
-  it('should render title', () => {
-
-    const title = fixture.nativeElement.querySelectorAll('.game-title')
-    console.log(title[0].textContent)
-    expect(title[0].textContent.trim()).toEqual('testing');
+  it('should have a game title', () => {
+    const title = fixture.nativeElement.querySelector('.game-title');
+    expect(title.textContent.trim()).toBe('test');
   });
 
+  it("check owner's name", () => {
+    const owner = fixture.nativeElement.querySelector('.owner');
+    expect(owner.textContent.trim()).toBe('Magesh yt');
+  });
+
+  it('check game image', () => {
+    const image = fixture.nativeElement.querySelector('.game-image');
+    expect(image.getAttribute('src')).toBe('assets/img/1.jpg');
+  });
 });

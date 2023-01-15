@@ -10,9 +10,5 @@ export const environment = {
     measurementId: 'G-VZP5GSLPFV',
   },
   production: true,
-  BaseUrl :"http://localhost:4200/"
+  BaseUrl: 'https://vercel.com/mageshyt/clipz-app-angular',
 };
-
-
-
- 

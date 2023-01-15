@@ -39,13 +39,12 @@ describe('TabsContainerComponent', () => {
 
   it('should create the component', () => {
     expect(component).toBeTruthy();
-   
   });
 
   it('should have 2 tabs', () => {
     const tabs = fixture.nativeElement.querySelectorAll('app-tab');
     //! check the length of the tabs array is 3
-  
+
     expect(tabs.length).toBe(3);
 
     const containerComponent = fixture.debugElement.query(

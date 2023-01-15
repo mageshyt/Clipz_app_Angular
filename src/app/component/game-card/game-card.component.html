@@ -6,7 +6,7 @@
     [src]="gameImage"
     crossorigin
     alt="game-image"
-    class="rounded-t-lg h-[300px] w-full"
+    class="rounded-t-lg game-image h-[300px] w-full"
   />
   <!-- about the clip -->
   <div class="flex justify-center mx-10 my-2 flex-col">
@@ -17,11 +17,12 @@
 
     <!-- posted by -->
     <div class="my-2 space-x-4">
-      <span class="font-meidum">
+      <span class="font-meidum owner">
         {{ postedBY }}
       </span>
       <span class="text-gray-500">
         {{ UploadedDate | fbTimestamp }}
+        <!-- {{ UploadedDate }} -->
       </span>
     </div>
   </div>
