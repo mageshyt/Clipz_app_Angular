@@ -23,8 +23,17 @@ export class PostService {
 
   public async like(video_id: string) {
     try {
+      // if user is not logged in then return
+      console.log("coming ", this.auth_service.currentUser)
+      if (!this.auth_service.currentUser) {
+        this.notyf.error('Please login to like ❌');
+        return 'not logged in';
+      }
+
       // get video_likes of the currentUser;
-      const { uid } = this.auth_service.currentUser;
+      const { uid } = this.auth_service.currentUser || 'undefined';
+
+
       //  get like  map datatype  of the video then add the video id in users
       return this.getUserLike(uid).then((videoLikes: any): any => {
 
@@ -67,6 +76,7 @@ export class PostService {
   }
 
   public async getUserLike(uid: string): Promise<string[]> {
+
     const video_likes = await this.db
       .collection<userCollection>('users')
       .doc(uid)
@@ -82,11 +92,15 @@ export class PostService {
     return video_likes;
   }
 
-  public async unlike(video_id: string): Promise<boolean> {
+  public async unlike(video_id: string) {
     let flag: boolean = false;
     try {
+      if (!this.auth_service.currentUser) {
+        this.notyf.error('Please login to like ❌');
+        return false;
+      }
+
       const { uid } = this.auth_service.currentUser;
-      console.log('uid', uid);
 
       //  get like  map datatype  of the video then add the video id in users
       const res = this.getUserLike(uid).then((videoLikes: any) => {
@@ -106,7 +120,6 @@ export class PostService {
               flag = true;
             }
             );
-
 
           // decrement likes of the video
           this.db
@@ -134,6 +147,10 @@ export class PostService {
 
 
     try {
+      if (!this.auth_service.currentUser) {
+        this.notyf.error('Please login to like ❌');
+        return false;
+      }
       // get video_likes of the currentUser;
       const { uid } = this.auth_service.currentUser;
 

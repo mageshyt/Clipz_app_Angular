@@ -14,9 +14,9 @@ export const environment = {
     measurementId: 'G-VZP5GSLPFV',
   },
   production: false,
-  BaseUrl :"http://localhost:4200/"
+  BaseUrl: "https://clipz-app-angular.vercel.app/"
 };
- 
+
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

@@ -41,16 +41,17 @@ export class UserDetailBoxComponent implements OnInit {
   ngOnInit(): void {
     this.reactionService.isUserLiked(this.clip_id).then(res => this.isLiked = res)
   }
-  
+
   like() {
     this.isLoading = true;
     if (this.clip_id)
       this.reactionService.like(this.clip_id).then((res: any) => {
         console.log('res ', res)
         this.isLoading = false;
-        this.isLiked = true;
-        if (res !== 'already liked') {
+        if (res !== 'already liked' && res.trim() !== 'not logged in') {
+          this.isLiked = true;
           // increment likes
+          console.log(" incementing likes ")
           this.likes++;
         }
       });
@@ -59,14 +60,15 @@ export class UserDetailBoxComponent implements OnInit {
   unlike() {
     this.isLoading = true;
     if (this.clip_id)
-      this.reactionService.unlike(this.clip_id).then((res) => {
-        console.log('unliked', res);
-        this.isUnliked = false;
-        // make is liked false
-        this.isLiked = false;
+      this.reactionService.unlike(this.clip_id).then((res: any) => {
+        if (res !== false) {
+          this.isUnliked = false;
+          // make is liked false
+          this.isLiked = false;
+          // decrement likes
+          this.likes--;
+        }
         this.isLoading = false; // make loading false
-        // decrement likes
-        this.likes--;
       });
 
   }
