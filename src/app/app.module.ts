@@ -17,9 +17,11 @@ import { ClipComponent } from './clip/clip.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { FbTimestampPipe } from './pipes/fb-timestamp.pipe';
 import { UserDetailBoxComponent } from './component/user-detail-box/user-detail-box.component';
-import { ToastrModule } from 'ngx-toastr';
+import { ToastContainerModule, ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { Notyf } from 'notyf';
+// Create an instance of Notyf
+var notyf = new Notyf();
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +44,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     AngularFirestoreModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({}),
+    ToastContainerModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

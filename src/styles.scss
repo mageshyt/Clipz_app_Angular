@@ -3,6 +3,16 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .animate_btn {
+    @apply transform transition-all duration-150 hover:scale-105;
+  }
+
+  .center {
+    // @apply flex justify-center items-center;
+  }
+}
+
 body {
   background-color: #161d31;
   &::-webkit-scrollbar {

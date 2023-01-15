@@ -145,10 +145,10 @@ export class ClipService implements Resolve<IClip | null> {
   }
 
   // function to get user detail by uid
-
   public async getUserDetail(uid: string) {
     const query = await this.db.collection('users').ref.doc(uid).get();
     const data = query.data();
     return data;
   }
+  
 }

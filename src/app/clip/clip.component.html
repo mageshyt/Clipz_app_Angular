@@ -1,8 +1,7 @@
 <div class="container relative z-50 mx-auto">
   <!-- Main Content -->
-  <section class="my-8 mx-2 bg-secondary p-6">
-    <div
-      class="flex items-center justify-center"
+<section class="my-8 mx-2 bg-secondary p-6">
+    <div class="flex items-center justify-center"
       *ngIf="!game_details; else videoContent"
     >
       <h1 class="text-3xl">Fetching Game Details ⌛</h1>
@@ -39,9 +38,9 @@
       ></video>
     </div>
   </section>
-
   <!-- user details -->
-  <app-user-detail-box [owner]="clip_user"> </app-user-detail-box>
+  <app-user-detail-box [clip_id]="game_id" [owner]="clip_user">
+  </app-user-detail-box>
   <!-- More clips -->
   <div class="mx-2 w-full">
     <h2 class="mt-6 text-2xl">More Clips</h2>
