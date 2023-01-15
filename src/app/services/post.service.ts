@@ -31,7 +31,7 @@ export class PostService {
       }
 
       // get video_likes of the currentUser;
-      const { uid } = this.auth_service.currentUser || 'undefined';
+      const { uid } = this.auth_service.currentUser;
 
 
       //  get like  map datatype  of the video then add the video id in users
@@ -93,23 +93,22 @@ export class PostService {
   }
 
   public async unlike(video_id: string) {
-    let flag: boolean = false;
     try {
       if (!this.auth_service.currentUser) {
         this.notyf.error('Please login to like ❌');
-        return false;
+        return 'not logged in'
       }
 
       const { uid } = this.auth_service.currentUser;
 
       //  get like  map datatype  of the video then add the video id in users
-      const res = this.getUserLike(uid).then((videoLikes: any) => {
+      return this.getUserLike(uid).then((videoLikes: any): any => {
         //  if video already liked then do nothing
         if (videoLikes[video_id]) {
           // make it false
           videoLikes[video_id] = false;
           // update the doc
-          this.db
+          return this.db
             .collection<userCollection>('users')
             .doc(uid)
             .update({
@@ -117,29 +116,33 @@ export class PostService {
             })
             .then(() => {
               this.notyf.success('Unliked successfully ✅ ');
-              flag = true;
+
+              // decrement likes of the video
+              this.db
+                .collection('clips')
+                .doc(video_id)
+                .update({
+                  likes: firebase.firestore.FieldValue.increment(-1),
+                })
+              return 'unliked';
             }
             );
 
-          // decrement likes of the video
-          this.db
-            .collection('clips')
-            .doc(video_id)
-            .update({
-              likes: firebase.firestore.FieldValue.increment(-1),
-            })
+
+
+
         }
         else {
           this.notyf.error('Already unliked ❌');
-
+          return 'already unliked'
         }
       });
-      return flag;
+
 
     } catch (err) {
       console.log(err);
       this.notyf.error('Something went wrong ❌');
-      return false;
+      return 'something went wrong';
     }
   }
 

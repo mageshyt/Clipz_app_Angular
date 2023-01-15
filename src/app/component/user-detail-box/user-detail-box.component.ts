@@ -48,7 +48,7 @@ export class UserDetailBoxComponent implements OnInit {
       this.reactionService.like(this.clip_id).then((res: any) => {
         console.log('res ', res)
         this.isLoading = false;
-        if (res !== 'already liked' && res.trim() !== 'not logged in') {
+        if (res !== 'already liked' && res !== 'not logged in') {
           this.isLiked = true;
           // increment likes
           console.log(" incementing likes ")
@@ -61,13 +61,16 @@ export class UserDetailBoxComponent implements OnInit {
     this.isLoading = true;
     if (this.clip_id)
       this.reactionService.unlike(this.clip_id).then((res: any) => {
-        if (res !== false) {
+        console.log('res ', res)
+        if (res === 'unliked') {
+
           this.isUnliked = false;
           // make is liked false
           this.isLiked = false;
           // decrement likes
           this.likes--;
         }
+
         this.isLoading = false; // make loading false
       });
 
