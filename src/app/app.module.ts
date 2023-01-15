@@ -20,6 +20,7 @@ import { UserDetailBoxComponent } from './component/user-detail-box/user-detail-
 import { ToastContainerModule, ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Notyf } from 'notyf';
+
 // Create an instance of Notyf
 var notyf = new Notyf();
 @NgModule({

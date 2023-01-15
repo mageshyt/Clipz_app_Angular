@@ -13,9 +13,10 @@ export const environment = {
     messagingSenderId: '10295722870',
     measurementId: 'G-VZP5GSLPFV',
   },
-  production: false
+  production: false,
+  BaseUrl :"http://localhost:4200/"
 };
-
+ 
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

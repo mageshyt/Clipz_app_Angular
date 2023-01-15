@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { PostService } from 'src/app/services/post.service';
 
-import { PostService } from 'src/app/service/post.service';
 
 @Component({
   selector: 'app-user-detail-box',
@@ -11,16 +11,22 @@ import { PostService } from 'src/app/service/post.service';
 export class UserDetailBoxComponent implements OnInit {
   style: any = {
     reaction_btn:
-      'bg-gray-600 disabled:cursor-not-allowed bg cursor-pointer material-symbols-outlined animate_btn  rounded-md p-2',
+      'bg-gray-600 disabled:cursor-not-allowed material-symbols-outlined animate_btn  rounded-md p-2',
     subscribe_btn:
       'bg-gray-600 p-2 rounded-md text-white font-semibold animate_btn',
   };
   @Input() owner: any;
 
-  @Input() clip_id?: string;
+  @Input() clip_id!: string;
+
+  @Input() likes: number = 0;
 
   isLoading: boolean = false;
   avatar: string = '';
+
+  isLiked: boolean = false;
+
+  isUnliked: boolean = false;
 
   getUserAvatar() {
     this.avatar =
@@ -30,21 +36,44 @@ export class UserDetailBoxComponent implements OnInit {
   }
   constructor(
     private toast: ToastrService,
-    private reactionService: PostService
-  ) {}
-
-  ngOnInit(): void {}
-
+    public reactionService: PostService
+  ) { }
+  ngOnInit(): void {
+    this.reactionService.isUserLiked(this.clip_id).then(res => this.isLiked = res)
+  }
+  
   like() {
     this.isLoading = true;
     if (this.clip_id)
-      this.reactionService.like(this.clip_id).then((res) => {
+      this.reactionService.like(this.clip_id).then((res: any) => {
+        console.log('res ', res)
         this.isLoading = false;
+        this.isLiked = true;
+        if (res !== 'already liked') {
+          // increment likes
+          this.likes++;
+        }
       });
+
+  }
+  unlike() {
+    this.isLoading = true;
+    if (this.clip_id)
+      this.reactionService.unlike(this.clip_id).then((res) => {
+        console.log('unliked', res);
+        this.isUnliked = false;
+        // make is liked false
+        this.isLiked = false;
+        this.isLoading = false; // make loading false
+        // decrement likes
+        this.likes--;
+      });
+
   }
 
   subscribe() {
-    this.reactionService.subscribe();
+    console.log(" is liked ", this.reactionService.isUserLiked(this.clip_id))
+    // this.reactionService.subscribe();
   }
 
   share() {

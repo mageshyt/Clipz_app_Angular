@@ -99,7 +99,7 @@ export class ClipService implements Resolve<IClip | null> {
   }
 
   // ! get clips
-  public async getClips() {
+  public async getClips(){
     if (this.pendingRequest) return;
     this.pendingRequest = true;
 

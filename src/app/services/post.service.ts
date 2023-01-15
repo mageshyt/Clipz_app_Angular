@@ -1,13 +1,16 @@
-import { userCollection } from './../services/auth.service';
+import { AuthService, userCollection } from './../services/auth.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import firebase from 'firebase/compat/app';
 import { Notyf } from 'notyf';
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root',
 })
 export class PostService {
+
+
   notyf = new Notyf({
     position: {
       x: 'right',
@@ -15,27 +18,22 @@ export class PostService {
     },
   });
 
-  constructor(private db: AngularFirestore, private auth: AngularFireAuth) {
-    // get currentUser
-    this.auth.user.subscribe((user) => {
-      this.current_user = user;
-    });
-  }
-  current_user: any;
+  constructor(private db: AngularFirestore, private auth_service: AuthService) { }
+
 
   public async like(video_id: string) {
     try {
       // get video_likes of the currentUser;
-      const { uid } = this.current_user;
-      console.log('uid', uid);
+      const { uid } = this.auth_service.currentUser;
       //  get like  map datatype  of the video then add the video id in users
-      this.getUserLike(uid).then((videoLikes: any) => {
-        console.log('videoLikes', videoLikes);
+      return this.getUserLike(uid).then((videoLikes: any): any => {
+
         //  if video already liked then do nothing
         if (videoLikes[video_id]) {
           this.notyf.error('Already liked ❌');
-          return;
+          return 'already liked';
         }
+        console.log("coming")
 
         if (videoLikes && !videoLikes[video_id]) {
           // add the key as video id
@@ -84,35 +82,73 @@ export class PostService {
     return video_likes;
   }
 
-  public async unlike(video_id: string) {
+  public async unlike(video_id: string): Promise<boolean> {
+    let flag: boolean = false;
     try {
-      // get video_likes of the currentUser;
-      const { uid } = this.current_user.uid;
+      const { uid } = this.auth_service.currentUser;
+      console.log('uid', uid);
 
       //  get like  map datatype  of the video then add the video id in users
-      this.getUserLike(uid).then((videoLikes: any) => {
+      const res = this.getUserLike(uid).then((videoLikes: any) => {
         //  if video already liked then do nothing
-        if (!videoLikes[video_id]) {
+        if (videoLikes[video_id]) {
+          // make it false
+          videoLikes[video_id] = false;
+          // update the doc
+          this.db
+            .collection<userCollection>('users')
+            .doc(uid)
+            .update({
+              video_likes: videoLikes,
+            })
+            .then(() => {
+              this.notyf.success('Unliked successfully ✅ ');
+              flag = true;
+            }
+            );
+
+
+          // decrement likes of the video
+          this.db
+            .collection('clips')
+            .doc(video_id)
+            .update({
+              likes: firebase.firestore.FieldValue.increment(-1),
+            })
+        }
+        else {
           this.notyf.error('Already unliked ❌');
-          return;
+
         }
       });
-    } catch (err) {}
+      return flag;
+
+    } catch (err) {
+      console.log(err);
+      this.notyf.error('Something went wrong ❌');
+      return false;
+    }
   }
 
-  public async isUserLiked(video_id: string): Promise<boolean> {
+  public async isUserLiked(video_id: string) {
+
+
     try {
       // get video_likes of the currentUser;
-      const { uid } = this.current_user.uid;
+      const { uid } = this.auth_service.currentUser;
 
-      const likes = this.getUserLike(uid).then((res: any) => {
-        if (res[video_id]) {
+      //  get like  map datatype  of the video then add the video id in users
+
+      return this.getUserLike(uid).then((videoLikes: any) => {
+        //  if video already liked then do nothing
+        if (videoLikes[video_id]) {
+          console.log('returning true');
           return true;
         }
         return false;
-      });
+      }
+      );
 
-      return true;
     } catch (err) {
       console.log(err);
       return false;
@@ -123,7 +159,7 @@ export class PostService {
 
   public share(video_id: string) {
     // copy to the clip board
-    const url = `https://clipr.netlify.app/clip/${video_id}`;
+    const url = `${environment.BaseUrl}/clip/${video_id}`;
     navigator.clipboard.writeText(url);
     this.notyf.success('Copied to clipboard ✅');
   }
