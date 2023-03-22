@@ -18,7 +18,6 @@ export class GameClipsComponent implements OnInit, OnDestroy {
 
   constructor(public clip: ClipService) {
     this.getClips();
-    console.log('clips', this.clip.pageClips);
   }
 
   ngOnInit(): void {
@@ -43,6 +42,5 @@ export class GameClipsComponent implements OnInit, OnDestroy {
 
   getClips = async () => {
     const res = await this.clip.getClips();
-    console.log('res', res);
   };
 }

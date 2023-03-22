@@ -14,6 +14,7 @@ import { ClipService } from 'src/app/services/clip.service';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { combineLatest, forkJoin } from 'rxjs';
+import { Notyf } from 'notyf';
 
 @Component({
   selector: 'app-upload',
@@ -21,6 +22,13 @@ import { combineLatest, forkJoin } from 'rxjs';
   styleUrls: ['./upload.component.scss'],
 })
 export class UploadComponent implements OnDestroy {
+  notyf = new Notyf({
+    position: {
+      x: 'right',
+      y: 'top',
+    },
+  });
+
   images: any[] = [
     '../../assets/img/1.jpg',
     '../../assets/img/2.jpg',
@@ -88,6 +96,7 @@ export class UploadComponent implements OnDestroy {
     this.alert.alertColor = 'gray';
 
     if (!this.file) {
+      this.notyf.error('Please select a file');
       return;
     }
 
@@ -144,6 +153,7 @@ export class UploadComponent implements OnDestroy {
             thumbnail: screen_short_url,
             timeStamp: firebase.firestore.FieldValue.serverTimestamp(),
             screen_short_name: `${randomFileName}.jpg`,
+            likes: 0,
           };
           //! create the doc
           const res: any = await this.clip_service
@@ -175,8 +185,17 @@ export class UploadComponent implements OnDestroy {
       ? event.dataTransfer.files[0]
       : event.target.files[0];
     //! only it should be mp4
-    console.log(this.file);
+
     if (!this.file || this.file.type !== 'video/mp4') {
+      this.notyf.error('Please select a mp4 file');
+      this.file = null;
+      return;
+    }
+    // get size of the file
+    const size = this.file.size / 1024 / 1024;
+    console.log(size);
+    if (size > 50) {
+      this.notyf.error('Please select a file less than 50MB');
       this.file = null;
       return;
     }

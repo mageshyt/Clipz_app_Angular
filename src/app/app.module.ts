@@ -16,7 +16,13 @@ import { AboutComponent } from './component/about/about.component';
 import { ClipComponent } from './clip/clip.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { FbTimestampPipe } from './pipes/fb-timestamp.pipe';
+import { UserDetailBoxComponent } from './component/user-detail-box/user-detail-box.component';
+import { ToastContainerModule, ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Notyf } from 'notyf';
 
+// Create an instance of Notyf
+var notyf = new Notyf();
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,6 +35,7 @@ import { FbTimestampPipe } from './pipes/fb-timestamp.pipe';
     ClipComponent,
     NotFoundComponent,
     FbTimestampPipe,
+    UserDetailBoxComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,6 +44,9 @@ import { FbTimestampPipe } from './pipes/fb-timestamp.pipe';
     AngularFireModule.initializeApp(environment.firebase),
     AppRoutingModule,
     AngularFirestoreModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({}),
+    ToastContainerModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,3 +1,6 @@
+import { ComponentRef } from '@angular/core';
+import { ToastRef } from 'ngx-toastr';
+import { Observable } from 'rxjs';
 import { Games } from 'src/app/component/game-clips/game-clips.component';
 
 export const games: Games[] = [
@@ -41,3 +44,24 @@ export const games: Games[] = [
       'https://as01.epimg.net/meristation/imagenes/2020/04/20/noticias/1587396399_171528_1587396566_noticia_normal.jpg',
   },
 ];
+
+export interface ActiveToast {
+  /** Your Toast ID. Use this to close it individually */
+  toastId: number;
+  /** the title of your toast. Stored to prevent duplicates if includeTitleDuplicates set */
+  title: string;
+  /** the message of your toast. Stored to prevent duplicates */
+  message: string;
+  /** a reference to the component see portal.ts */
+  portal: ComponentRef<any>;
+  /** a reference to your toast */
+  toastRef: ToastRef<any>;
+  /** triggered when toast is active */
+  onShown: Observable<any>;
+  /** triggered when toast is destroyed */
+  onHidden: Observable<any>;
+  /** triggered on toast click */
+  onTap: Observable<any>;
+  /** available for your use in custom toast */
+  onAction: Observable<any>;
+}

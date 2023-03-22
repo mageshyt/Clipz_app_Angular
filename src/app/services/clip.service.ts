@@ -94,11 +94,12 @@ export class ClipService implements Resolve<IClip | null> {
   public async getVideoDetail(video_id: string) {
     const query = await this.clipsCollection.ref.doc(video_id).get();
     const data = query.data() as IClip;
-    return data;
+ 
+    return  data;
   }
 
   // ! get clips
-  public async getClips() {
+  public async getClips(){
     if (this.pendingRequest) return;
     this.pendingRequest = true;
 
@@ -142,4 +143,12 @@ export class ClipService implements Resolve<IClip | null> {
         })
       );
   }
+
+  // function to get user detail by uid
+  public async getUserDetail(uid: string) {
+    const query = await this.db.collection('users').ref.doc(uid).get();
+    const data = query.data();
+    return data;
+  }
+  
 }

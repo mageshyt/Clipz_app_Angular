@@ -34,7 +34,8 @@
             ],
             "styles": [
               "src/styles.scss",
-              "node_modules/ngx-spinner/animations/ball-scale-multiple.css"
+              "node_modules/ngx-toastr/toastr.css",
+              "src/toast.css"
             ],
             "scripts": []
           },
@@ -43,13 +44,13 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "5mb",
+                  "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "50kb",
+                  "maximumError": "50kb"
                 }
               ],
               "fileReplacements": [
@@ -103,6 +104,7 @@
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "inlineStyleLanguage": "scss",
+<<<<<<< HEAD
             "assets": [
               "src/favicon.ico",
               "src/assets"
@@ -110,6 +112,10 @@
             "styles": [
               "src/styles.scss"
             ],
+=======
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/styles.scss", "node_modules/ngx-toastr/toastr.css"],
+>>>>>>> 7a09b81d0ba65f32dc6e8fbae89ca316cc501a25
             "scripts": []
           }
         },

@@ -13,7 +13,8 @@ export const environment = {
     messagingSenderId: '10295722870',
     measurementId: 'G-VZP5GSLPFV',
   },
-  production: false
+  production: false,
+  BaseUrl: 'https://vercel.com/mageshyt/clipz-app-angular',
 };
 
 /*

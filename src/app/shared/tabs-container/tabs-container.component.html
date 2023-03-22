@@ -1,8 +1,8 @@
 <!-- login and register btn -->
-<div class="flex flow-row space-x-5 flex-1 justify-around px-3 py-4">
+<div class="flex flow-row space-x-5 overflow-hidden flex-1 justify-around p-3">
   <div *ngFor="let tab of tabs">
     <button
-      class="py-3 w-[200px] h-[50px] px-4"
+      class="py-3 w-[200px] h-[50px]"
       (click)="selectTab(tab)"
       [class.bg-indigo-400]="tab.active"
       [ngClass]="{

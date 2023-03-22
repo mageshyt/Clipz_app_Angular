@@ -1,0 +1,66 @@
+<div
+  *ngIf="owner"
+  class="flex mx-3 items-center bg-secondary space-x-4 p-3 h-[80px] mt-4 rounded-md"
+>
+  <!-- user  logo -->
+  <div class="flex flex-col justify-center items-center">
+    <img
+      class="w-10 h-10 rounded-full border-green-400 border-[2px]"
+      [src]="
+        'https://avatars.dicebear.com/api/pixel-art/' +
+        this.owner?.name +
+        '.svg;'
+      "
+      crossorigin
+    />
+    <!-- name -->
+    <span class="text-white font-semibold">
+      {{ owner.name }}
+    </span>
+  </div>
+
+  <!-- subscribe -->
+
+  <div class="flex items-center md:text-lg text-sm">
+    <button (click)="subscribe()" [ngClass]="style.subscribe_btn">
+      Subscribe
+    </button>
+  </div>
+
+  <!-- reactions -->
+  <div class="flex items-center space-x-3">
+    <!-- like -->
+    <button
+      [disabled]="isLoading"
+      (click)="like()"
+      class="items-center animate_btn flex space-x-2 bg-gray-600 p-2 rounded-md"
+    >
+      <span *ngIf="!isLiked" class="material-symbols-outlined"> thumb_up </span>
+
+      <!-- solid -->
+      <span *ngIf="isLiked" class="material-icons">thumb_up</span>
+      <!-- count -->
+      <span>
+        {{ likes }}
+      </span>
+    </button>
+
+    <!-- dislike -->
+    <button
+      [disabled]="isLoading"
+      (click)="unlike()"
+      [ngClass]="style.reaction_btn"
+    >
+      <span *ngIf="!isUnliked" class="material-symbols-outline">
+        thumb_down
+      </span>
+      <!-- solid -->
+      <span *ngIf="isUnliked" class="material-icons"> thumb_down</span>
+    </button>
+
+    <!-- share -->
+    <button (click)="share()">
+      <span [ngClass]="style.reaction_btn"> share </span>
+    </button>
+  </div>
+</div>
