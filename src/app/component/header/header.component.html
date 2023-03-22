@@ -1,49 +1,47 @@
 <header class="bg-[#283046] overflow-hidden">
-  <nav class="container mx-auto flex justify-start items-center py-8 px-4">
+  <nav class="container flex items-center justify-start px-4 py-8 mx-auto">
     <!-- App Name -->
-    <a class="text-3xl text-indigo-400 font-bold uppercase mr-4" routerLink="/"
+    <a class="mr-4 text-3xl font-bold text-indigo-400 uppercase" routerLink="/"
       >Clipz</a
     >
     <!-- Nav items -->
-    <div
-      class="md:flex nav-items flex-row space-x-3 text-gray-300 flex-1 hidden"
-    >
+    <div class="flex-row flex-1 space-x-3 text-gray-300 md:flex nav-items">
       <span
         *ngIf="!isAuthenticated; else authLinks"
         (click)="showAuthModal()"
-        class="cursor-pointer login_btn transform transition-all duration-200 hover:scale-110"
+        class="mx-4 transition-all duration-200 transform cursor-pointer login_btn hover:scale-110"
       >
         Login / Register
       </span>
 
-      <ng-template #authLinks>
+      <ng-template class="hidden md:block" #authLinks>
         <span
           routerLinkActive="text-indigo-400"
           routerLink="/manage"
           [routerLinkActiveOptions]="{ exact: true }"
           [queryParams]="{ sort: '1' }"
-          class="cursor-pointer transform transition-all duration-200 hover:scale-110"
+          class="transition-all duration-200 transform cursor-pointer hover:scale-110"
           >Manage</span
         >
 
         <span
           routerLinkActive="text-indigo-400"
           routerLink="/upload"
-          class="cursor-pointer transform transition-all duration-200 hover:scale-110"
+          class="transition-all duration-200 transform cursor-pointer hover:scale-110"
           >Upload</span
         >
         <!-- logout -->
         <span
           routerLinkActive="text-indigo-400"
           (click)="logout($event)"
-          class="cursor-pointer transform transition-all duration-200 logout-btn hover:scale-110"
+          class="transition-all duration-200 transform cursor-pointer logout-btn hover:scale-110"
           >Logout</span
         >
       </ng-template>
       <span
         routerLinkActive="text-indigo-400"
         routerLink="/about"
-        class="cursor-pointer transform transition-all duration-200 hover:scale-110"
+        class="hidden transition-all duration-200 transform cursor-pointer md:block hover:scale-110"
       >
         About
       </span>
@@ -59,7 +57,7 @@
           height="14"
           class="inline-block"
         />
-        <span class="ml-1 text-gray-300 mx-2">English</span>
+        <span class="mx-2 ml-1 text-gray-300">English</span>
       </a>
     </div>
   </nav>
