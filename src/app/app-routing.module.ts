@@ -6,6 +6,7 @@ import { HomeComponent } from './component/home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ClipService } from './services/clip.service';
 import { ManageComponent } from './video/manage/manage.component';
+import { BookShowComponent } from './book-show/book-show.component';
 
 const routes: Routes = [
   {
@@ -15,6 +16,10 @@ const routes: Routes = [
   {
     path: 'about',
     component: AboutComponent,
+  },
+  {
+    path: 'bookShow',
+    component: BookShowComponent,
   },
   {
     path: 'clip/:id',

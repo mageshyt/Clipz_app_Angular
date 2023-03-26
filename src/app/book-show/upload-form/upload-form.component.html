@@ -1,0 +1,71 @@
+<form
+  [formGroup]="ShowForm"
+  (ngSubmit)="onSubmit()"
+  class="p-4 overflow-y-auto h-[600px] md:max-h-[700px] scrollbar-hide"
+>
+  <app-custom-input
+    label="Title"
+    type="text"
+    placeholder="Title"
+    required
+    [controller]="ShowForm.controls.Title"
+  ></app-custom-input>
+
+  <app-custom-input
+    label="Description"
+    type="text"
+    placeholder="Description"
+    name="description"
+    required
+    [controller]="ShowForm.controls.description"
+  ></app-custom-input>
+
+  <app-upload-image [files]="files"></app-upload-image>
+
+  <app-custom-input
+    label="Price"
+    type="number"
+    placeholder="Price"
+    name="price"
+    required
+    [controller]="ShowForm.controls.price"
+  ></app-custom-input>
+
+  <app-custom-input
+    label="Category"
+    type="text"
+    placeholder="Category"
+    name="category"
+    required
+    [controller]="ShowForm.controls.category"
+  ></app-custom-input>
+
+  <!-- date -->
+  <app-custom-input
+    label="Date"
+    type="date"
+    placeholder="Date"
+    name="date"
+    required
+    [controller]="ShowForm.controls.date"
+  ></app-custom-input>
+
+  <!-- time -->
+  <app-custom-input
+    label="Time"
+    type="time"
+    placeholder="Time"
+    name="time"
+    required
+    [controller]="ShowForm.controls.time"
+  ></app-custom-input>
+
+  <!-- button -->
+
+  <button
+    class="w-full px-4 py-2 mt-4 text-white bg-indigo-500 rounded-md disabled:cursor-not-allowed hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-75"
+    [disabled]="ShowForm.invalid || loading"
+  >
+    Submit
+  </button>
+</form>

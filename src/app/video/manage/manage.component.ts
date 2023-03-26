@@ -22,8 +22,10 @@ export class ManageComponent implements OnInit {
     private modal: ModalService
   ) {
     this.sort$ = new BehaviorSubject(this.videoOrder);
-
-    this.sort$.subscribe(console.log as any);
+    console.log(this.sort$);
+    this.sort$.subscribe((data) => {
+      console.log(data);
+    });
     this.sort$.next('test');
   }
 

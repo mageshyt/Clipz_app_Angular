@@ -9,7 +9,7 @@
       <span
         *ngIf="!isAuthenticated; else authLinks"
         (click)="showAuthModal()"
-        class="mx-4 transition-all duration-200 transform cursor-pointer login_btn hover:scale-110"
+        class="mx-2 transition-all duration-200 transform cursor-pointer login_btn hover:scale-110"
       >
         Login / Register
       </span>
@@ -44,6 +44,14 @@
         class="hidden transition-all duration-200 transform cursor-pointer md:block hover:scale-110"
       >
         About
+      </span>
+
+      <span
+        routerLinkActive="text-indigo-400"
+        routerLink="/bookShow"
+        class="hidden transition-all duration-200 transform cursor-pointer md:block hover:scale-110"
+      >
+        Book Show
       </span>
     </div>
 

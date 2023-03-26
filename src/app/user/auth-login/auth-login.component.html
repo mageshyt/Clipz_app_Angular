@@ -1,10 +1,15 @@
-<form class="px-4" #LoginForm="ngForm" (ngSubmit)="onSubmit(LoginForm)">
+<form
+  class="px-4"
+  *ngIf="!forgetPassword"
+  #LoginForm="ngForm"
+  (ngSubmit)="onSubmit(LoginForm)"
+>
   <app-alert *ngIf="showAlert" [color]="alertColor">
     {{ alertMessage }}
   </app-alert>
   <!-- Email -->
   <div class="flex flex-col mt-5">
-    <label for="password" class="text-gray-200 text-sm font-bold mb-2"
+    <label for="password" class="mb-2 text-sm font-bold text-gray-200"
       >Email</label
     >
     <input
@@ -20,16 +25,17 @@
       pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
     />
   </div>
-  <!-- Errors Mail --> <p
+  <!-- Errors Mail -->
+  <p
     *ngIf="email.errors && email.touched"
-    class="text-red-500 text-sm font-bold mb-2"
+    class="mb-2 text-sm font-bold text-red-500"
   >
     Email is InValid
   </p>
 
   <!-- Password -->
   <div class="flex flex-col my-5">
-    <label for="password" class="text-gray-200 text-sm font-bold mb-2"
+    <label for="password" class="mb-2 text-sm font-bold text-gray-200"
       >password</label
     >
     <input
@@ -46,10 +52,21 @@
     <!-- pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}" -->
   </div>
 
+  <!-- forget password -->
+  <div class="flex justify-end">
+    <button
+      type="button"
+      (click)="onForgetPasswordClick()"
+      class="text-sm text-indigo-400 hover:text-indigo-500 hover:underline"
+    >
+      Forget Password?
+    </button>
+  </div>
+
   <!-- Errors password-->
   <p
     *ngIf="password.errors && password.touched"
-    class="text-red-500  text-sm font-bold mb-2"
+    class="mb-2 text-sm font-bold text-red-500"
   >
     Password must be at least 8 characters, contain at least one lowercase
     letter
@@ -63,8 +80,61 @@
       ' cursor-not-allowed disabled:opacity-60 ':
         LoginForm.invalid || LoginForm.pending || LoginForm.disabled
     }"
-    class="mt-4 w-full submit_btn border border-indigo-400 disabled:cursor-not-allowed p-2 transition-all transform duration-200 hover:bg-indigo-400"
+    class="w-full p-2 mt-4 transition-all duration-200 transform border border-indigo-400 submit_btn disabled:cursor-not-allowed hover:bg-indigo-400"
   >
     Sign In
+  </button>
+</form>
+
+<!-- forget password -->
+
+<form
+  *ngIf="forgetPassword"
+  (ngSubmit)="onForgetPassword(ChangePassword)"
+  class="px-4"
+  #ChangePassword="ngForm"
+>
+  <app-alert *ngIf="showAlert" [color]="alertColor">
+    {{ alertMessage }}
+  </app-alert>
+  <div class="flex flex-col mt-5">
+    <label for="password" class="mb-2 text-sm font-bold text-gray-200"
+      >Email</label
+    >
+    <input
+      label="Email"
+      required
+      type="email"
+      placeholder="Email"
+      #email="ngModel"
+      name="email"
+      ngModel="{{ forgetPasswordForm.email }}"
+      required
+      class="block w-full py-1.5 px-3 text-gray-200 border border-gray-400 transition duration-500 focus:outline-none bg-transparent focus:border-indigo-400"
+      pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
+    />
+  </div>
+
+  <!-- Errors Mail -->
+  <p
+    *ngIf="email.errors && email.touched"
+    class="mb-2 text-sm font-bold text-red-500"
+  >
+    Email is InValid
+  </p>
+
+  <!-- submit -->
+  <button
+    type="submit"
+    [disabled]="ChangePassword.invalid || inSubmission"
+    [ngClass]="{
+      ' cursor-not-allowed disabled:opacity-60 ':
+        ChangePassword.invalid ||
+        ChangePassword.pending ||
+        ChangePassword.disabled
+    }"
+    class="w-full p-2 mt-4 transition-all duration-200 transform border border-indigo-400 submit_btn disabled:cursor-not-allowed hover:bg-indigo-400"
+  >
+    Send
   </button>
 </form>

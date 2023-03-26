@@ -1,0 +1,25 @@
+<section>
+  <!-- title -->
+
+  <h1 class="my-6 text-4xl text-center uppercase">Latest Show</h1>
+
+  <!-- button for Make Show -->
+
+  <div *ngIf="auth.currentUser" class="flex justify-center">
+    <button
+      class="px-4 py-2 font-bold text-white bg-indigo-500 rounded hover:bg-indigo-700"
+      (click)="bookShow()"
+    >
+      Make Show
+    </button>
+  </div>
+
+  <!-- all shows -->
+  <app-all-shows></app-all-shows>
+</section>
+
+<app-modal modalId="bookShowModal" modalTitle="Make Show">
+  <!-- name  -->
+  <span heading class="text-2xl font-bold"> Make Show </span>
+  <app-upload-form></app-upload-form>
+</app-modal>

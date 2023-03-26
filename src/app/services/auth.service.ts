@@ -30,7 +30,6 @@ export interface userCollection {
   providedIn: 'root',
 })
 export class AuthService {
-
   public isAuthenticated$!: Observable<boolean>;
   public isAuthenticatedWithDelay$!: Observable<boolean>;
   private redirect: boolean = false;
@@ -96,9 +95,12 @@ export class AuthService {
   public async signOut<Observable>() {
     // ! if you want to redirect to a page after signOut
     return await this.auth.signOut().then(() => {
-      if (this.redirect) {
-        this.router.navigateByUrl('/');
-      }
+      this.router.navigateByUrl('/');
     });
+  }
+
+  // ! forget password
+  public async forgetPassword(email: string) {
+    return await this.auth.sendPasswordResetEmail(email);
   }
 }

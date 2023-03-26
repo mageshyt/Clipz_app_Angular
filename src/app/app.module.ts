@@ -1,3 +1,5 @@
+import { AllShowsModule } from './component/all-shows/all-shows.module';
+import { BookShowModule } from './book-show/book-show.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -19,10 +21,7 @@ import { FbTimestampPipe } from './pipes/fb-timestamp.pipe';
 import { UserDetailBoxComponent } from './component/user-detail-box/user-detail-box.component';
 import { ToastContainerModule, ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { Notyf } from 'notyf';
-
-// Create an instance of Notyf
-var notyf = new Notyf();
+import { ClipModule } from './clip/clip.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +33,6 @@ var notyf = new Notyf();
     AboutComponent,
     ClipComponent,
     NotFoundComponent,
-    FbTimestampPipe,
     UserDetailBoxComponent,
   ],
   imports: [
@@ -47,8 +45,12 @@ var notyf = new Notyf();
     BrowserAnimationsModule,
     ToastrModule.forRoot({}),
     ToastContainerModule,
+    BookShowModule,
+    AllShowsModule,
+    ClipModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
+  exports: [],
 })
 export class AppModule {}

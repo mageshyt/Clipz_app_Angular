@@ -16,9 +16,7 @@ export class VideoCardComponent implements OnInit {
     console.log('edit', $event);
   }
 
-  constructor(private modal: ModalService, private clip: ClipService) {
-    console.log('video card', this.imgUrl);
-  }
+  constructor(private modal: ModalService, private clip: ClipService) {}
 
   ngOnInit(): void {}
   showVideoModal($event: any, clip: IClip) {

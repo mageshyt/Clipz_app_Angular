@@ -1,7 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { FbTimestampPipe } from '../../pipes/fb-timestamp.pipe';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-game-card',
   templateUrl: './game-card.component.html',

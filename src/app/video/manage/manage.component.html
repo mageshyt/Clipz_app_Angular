@@ -1,8 +1,8 @@
-<div class="mt-10 overflow-hidden container mx-auto">
+<div class="container mx-auto mt-10 overflow-hidden">
   <!--    Top bar -->
   <app-top-bar></app-top-bar>
   <!-- uploaded video -->
-  <div class="flex flex-1 items-center justify-center flex-wrap gap-5">
+  <div class="flex flex-wrap items-center justify-center flex-1 gap-5">
     <app-video-card
       *ngFor="let game of gameDetails"
       [title]="game.title"
@@ -10,6 +10,7 @@
       [videoData]="game"
       (openModal)="openModal($event)"
       (onDelete)="onDelete($event)"
+      
     >
     </app-video-card>
   </div>

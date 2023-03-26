@@ -94,12 +94,12 @@ export class ClipService implements Resolve<IClip | null> {
   public async getVideoDetail(video_id: string) {
     const query = await this.clipsCollection.ref.doc(video_id).get();
     const data = query.data() as IClip;
- 
-    return  data;
+
+    return data;
   }
 
   // ! get clips
-  public async getClips(){
+  public async getClips() {
     if (this.pendingRequest) return;
     this.pendingRequest = true;
 
@@ -150,5 +150,16 @@ export class ClipService implements Resolve<IClip | null> {
     const data = query.data();
     return data;
   }
-  
+
+  // get oldest clips
+  public async getOldestClips() {
+    if (this.pendingRequest) return;
+    this.pendingRequest = true;
+
+    let query = this.clipsCollection.ref.orderBy('timeStamp', 'asc');
+
+    const data = await query.get();
+    const clips = data.docs.map((doc) => doc.data() as IClip);
+    return clips;
+  }
 }

@@ -1,6 +1,8 @@
 import { ClipService, IClip } from './../../services/clip.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { Router } from '@angular/router';
+
 export interface Games {
   gameTitle: string;
   gameImage: string;
@@ -16,7 +18,7 @@ export interface Games {
 export class GameClipsComponent implements OnInit, OnDestroy {
   gameDetails?: IClip[];
 
-  constructor(public clip: ClipService) {
+  constructor(public clip: ClipService, private router: Router) {
     this.getClips();
   }
 
@@ -27,11 +29,13 @@ export class GameClipsComponent implements OnInit, OnDestroy {
   }
 
   handleScroll = () => {
+    // only on home page
+    if (this.router.url !== '/') return;
     const { scrollHeight, scrollTop, clientHeight } = document.documentElement;
     if (clientHeight + scrollTop >= scrollHeight) {
       // !fetch more data
-      console.log('fetch more data');
-      this.getClips();
+
+      this.clip.getClips();
     }
   };
 

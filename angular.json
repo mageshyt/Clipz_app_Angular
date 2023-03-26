@@ -104,7 +104,6 @@
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "inlineStyleLanguage": "scss",
-<<<<<<< HEAD
             "assets": [
               "src/favicon.ico",
               "src/assets"
@@ -112,10 +111,6 @@
             "styles": [
               "src/styles.scss"
             ],
-=======
-            "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles.scss", "node_modules/ngx-toastr/toastr.css"],
->>>>>>> 7a09b81d0ba65f32dc6e8fbae89ca316cc501a25
             "scripts": []
           }
         },

@@ -8,11 +8,9 @@ import {
 import firebase from 'firebase/compat/app';
 import { v4 as uuidv4 } from 'uuid';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { last, switchMap } from 'rxjs/operators';
 import { ClipService } from 'src/app/services/clip.service';
 import { Router } from '@angular/router';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { combineLatest, forkJoin } from 'rxjs';
 import { Notyf } from 'notyf';
 

@@ -1,0 +1,50 @@
+<!-- upload image -->
+<div
+  (dragend)="isDrageOver = false"
+  (dragenter)="isDrageOver = true"
+  (dragleave)="isDrageOver = false"
+  (dragover)="isDrageOver = true"
+  (mouseleave)="isDrageOver = false"
+  app-event-blocker
+  [ngClass]="{ 'bg-indigo-500  ': isDrageOver }"
+  class="relative p-3 my-2 border-2 border-dashed rounded-md select-none animate hover:bg-indigo-600"
+>
+  <div class="absolute flex flex-col items-center justify-center inset-2">
+    <img
+      src="assets/img/upload_image.png"
+      alt="upload"
+      class="object-contain w-10 h-10"
+    />
+    <!-- Add photo/video -->
+    <span class="ml-2 text-lg font-semibold text-white">Add photo/video</span>
+    <!-- or drag and drop -->
+    <span class="ml-2 text-sm text-gray-500">or drag and drop</span>
+  </div>
+
+  <!-- upload image input -->
+  <input
+    type="file"
+    class="h-[80px] opacity-0 w-full text-center cursor-pointer"
+    #fileInput
+    (change)="onDrop($event)"
+  />
+</div>
+
+<div class="flex">
+  <div class="relative flex mx-2" *ngFor="let image of files">
+    <!-- remove icon -->
+    <span
+      (click)="removeImage(image)"
+      class="absolute right-0 flex items-center justify-center w-4 h-4 p-1 text-xs text-white bg-black rounded-full cursor-pointer -top-1"
+    >
+      x
+    </span>
+    <!-- image preview -->
+    <img
+      id="blah"
+      [src]="image?.url || 'http://placehold.it/180'"
+      alt="your image"
+      class="object-cover w-20 h-20 mr-2 rounded-md"
+    />
+  </div>
+</div>

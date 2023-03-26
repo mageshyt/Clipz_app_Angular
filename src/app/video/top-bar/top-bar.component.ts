@@ -13,7 +13,7 @@ export class TopBarComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParamMap.subscribe(({ params }: any) => {
       this.videoOrder = params.sort === '2' ? params.sort : '1';
-      console.log('params', params.sort);
+      
     });
   }
 
