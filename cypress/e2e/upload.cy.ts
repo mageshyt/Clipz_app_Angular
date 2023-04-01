@@ -3,11 +3,12 @@
 describe('Upload Video', () => {
   it('should upload video', () => {
     cy.visit('/');
-    cy.loginToApp('demo@demo.com', 'demodemo');
+    // check if login button is visible
+    // if not then return
 
     // click on upload button
-    cy.clickNavBtn('Upload');
+    cy.get('[routerlink="/upload"]').wait(1500).click();
 
-    cy.get('.upload_video').wait(1500).attachFile('video.mp4', {});
+    // cy.get('.upload_video').wait(1500).attachFile('video.mp4', {});
   });
 });

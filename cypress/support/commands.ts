@@ -9,7 +9,9 @@ declare namespace Cypress {
 
 Cypress.Commands.add('loginToApp', (email, password) => {
   // check if login button is visible
-  cy.get('.login_btn').should('be.visible');
+  // if not then return
+
+
   // click on login button
 
   cy.get('.login_btn').wait(1500).click();

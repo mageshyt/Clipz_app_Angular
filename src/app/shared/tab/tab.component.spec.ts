@@ -31,6 +31,4 @@ describe('Tab component', () => {
 
     expect(fixture.nativeElement.querySelector('.hidden')).not.toBeTruthy();
   });
-
-  
 });

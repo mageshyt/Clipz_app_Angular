@@ -9,7 +9,10 @@ export class FfmpegService {
   isUploading = false;
   private ffmpeg;
   constructor() {
-    this.ffmpeg = createFFmpeg({ log: true }); // log: true to see logs in console
+    this.ffmpeg = createFFmpeg({
+      log: true,
+      
+    }); // log: true to see logs in console
   }
 
   async load() {

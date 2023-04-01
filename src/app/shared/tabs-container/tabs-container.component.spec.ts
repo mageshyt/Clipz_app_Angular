@@ -44,12 +44,7 @@ describe('TabsContainerComponent', () => {
   it('should have 2 tabs', () => {
     const tabs = fixture.nativeElement.querySelectorAll('app-tab');
     //! check the length of the tabs array is 3
-<<<<<<< HEAD
     expect(tabs.length).withContext('tabs did not render').toBe(3);
-=======
-
-    expect(tabs.length).toBe(3);
->>>>>>> 7a09b81d0ba65f32dc6e8fbae89ca316cc501a25
 
     const containerComponent = fixture.debugElement.query(
       By.css('app-tabs-container')
