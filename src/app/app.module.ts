@@ -17,7 +17,8 @@ import { HomeComponent } from './component/home/home.component';
 import { AboutComponent } from './component/about/about.component';
 import { ClipComponent } from './clip/clip.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { FbTimestampPipe } from './pipes/fb-timestamp.pipe';
+import { HttpClientModule } from '@angular/common/http';
+
 import { UserDetailBoxComponent } from './component/user-detail-box/user-detail-box.component';
 import { ToastContainerModule, ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -44,6 +45,7 @@ import { ClipModule } from './clip/clip.module';
     AngularFirestoreModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({}),
+    HttpClientModule,
     ToastContainerModule,
     BookShowModule,
     AllShowsModule,

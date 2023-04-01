@@ -24,6 +24,7 @@ export interface userCollection {
   age: number;
   phone: string;
   video_likes: Object;
+  bookedShows: Object;
 }
 
 @Injectable({
@@ -78,7 +79,7 @@ export class AuthService {
       name: data.name,
       age: data.age,
       phone: data.phoneNumber,
-
+      bookedShows: {},
       video_likes: {},
     });
 

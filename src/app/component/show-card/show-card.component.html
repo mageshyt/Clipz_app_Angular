@@ -1,5 +1,5 @@
 <div
-  class="bg-[#283046] overflow-hidden p-2 py-4 mx-3 select-none justify-between flex flex-col md:w-[450px] w-[350px] rounded-md h-[480px] transform transition-all duration-200 hover:scale-105 cursor-pointer"
+  class="bg-[#283046] overflow-hidden card_constainer p-2 py-4 mx-3 select-none justify-between flex flex-col md:w-[450px] w-[350px] rounded-md h-[480px] transform transition-all duration-200 hover:scale-105 cursor-pointer"
 >
   <!-- banner image -->
 
@@ -54,12 +54,23 @@
   </div>
   <!-- book show btn -->
 
-  <div class="flex justify-center">
+  <div class="flex justify-center btn_container">
     <button
-      class="bg-[#FFC107] disabled:cursor-not-allowed disabled:opacity-70 text-white font-semibold py-2 px-4 rounded-full"
+      *ngIf="!isAlreadyBooked"
+      (click)="bookShow()"
+      class="bg-[#FFC107] bookshow_btn disabled:cursor-not-allowed disabled:opacity-70 text-white font-semibold py-2 px-4 rounded-full"
       [disabled]="currentUserId === show.creator"
     >
       Book Show
+    </button>
+
+    <button
+      *ngIf="isAlreadyBooked"
+      (click)="cancelBooking()"
+      class="bg-[#ff0707] bookshow_btn disabled:cursor-not-allowed disabled:opacity-70 text-white font-semibold py-2 px-4 rounded-full"
+      [disabled]="currentUserId === show.creator"
+    >
+      Cancel Booking
     </button>
   </div>
 </div>

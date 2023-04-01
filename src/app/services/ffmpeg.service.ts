@@ -11,7 +11,6 @@ export class FfmpegService {
   constructor() {
     this.ffmpeg = createFFmpeg({
       log: true,
-      
     }); // log: true to see logs in console
   }
 

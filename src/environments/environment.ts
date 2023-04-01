@@ -15,6 +15,7 @@ export const environment = {
   },
   production: false,
   BaseUrl: 'https://vercel.com/mageshyt/clipz-app-angular',
+  
 };
 
 /*

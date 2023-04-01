@@ -32,11 +32,12 @@ export class UploadFormComponent implements OnInit {
     this.loading = true;
     this.ShowForm.disable();
     // get the image file
-
+ 
     const doc = {
       ...this.ShowForm.value,
       thumbnail: this.files[0],
       creator: this.auth.currentUser?.uid,
+
     };
 
     this.upload.AddShow(doc).then((res) => {

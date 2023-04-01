@@ -2,7 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { PostService } from 'src/app/services/post.service';
 
-
 @Component({
   selector: 'app-user-detail-box',
   templateUrl: './user-detail-box.component.html',
@@ -37,33 +36,33 @@ export class UserDetailBoxComponent implements OnInit {
   constructor(
     private toast: ToastrService,
     public reactionService: PostService
-  ) { }
+  ) {}
   ngOnInit(): void {
-    this.reactionService.isUserLiked(this.clip_id).then(res => this.isLiked = res)
+    this.reactionService
+      .isUserLiked(this.clip_id)
+      .then((res) => (this.isLiked = res));
   }
 
   like() {
     this.isLoading = true;
     if (this.clip_id)
       this.reactionService.like(this.clip_id).then((res: any) => {
-        console.log('res ', res)
+        console.log('res ', res);
         this.isLoading = false;
         if (res !== 'already liked' && res !== 'not logged in') {
           this.isLiked = true;
           // increment likes
-          console.log(" incementing likes ")
+          console.log(' incementing likes ');
           this.likes++;
         }
       });
-
   }
   unlike() {
     this.isLoading = true;
     if (this.clip_id)
       this.reactionService.unlike(this.clip_id).then((res: any) => {
-        console.log('res ', res)
+        console.log('res ', res);
         if (res === 'unliked') {
-
           this.isUnliked = false;
           // make is liked false
           this.isLiked = false;
@@ -73,11 +72,10 @@ export class UserDetailBoxComponent implements OnInit {
 
         this.isLoading = false; // make loading false
       });
-
   }
 
   subscribe() {
-    console.log(" is liked ", this.reactionService.isUserLiked(this.clip_id))
+    console.log(' is liked ', this.reactionService.subscribe());
     // this.reactionService.subscribe();
   }
 

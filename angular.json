@@ -77,7 +77,6 @@
           "configurations": {
             "production": {
               "browserTarget": "clips_app:build:production",
-
               "headers": {
                 "Cross-Origin-Embedder-Policy": "require-corp",
                 "Cross-Origin-Opener-Policy": "same-origin"
@@ -87,13 +86,7 @@
               "browserTarget": "clips_app:build:development"
             }
           },
-          "defaultConfiguration": "development",
-          "options": {
-            "headers": {
-              "Cross-Origin-Embedder-Policy": "require-corp",
-              "Cross-Origin-Opener-Policy": "same-origin"
-            }
-          }
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
@@ -151,11 +144,20 @@
           "options": {
             "devServerTarget": "clips_app:serve",
             "watch": true,
-            "headless": false
+            "headless": false,
+
+            "headers": {
+              "Cross-Origin-Embedder-Policy": "require-corp",
+              "Cross-Origin-Opener-Policy": "same-origin"
+            }
           },
           "configurations": {
             "production": {
-              "devServerTarget": "clips_app:serve:production"
+              "devServerTarget": "clips_app:serve:production",
+              "headers": {
+                "Cross-Origin-Embedder-Policy": "require-corp",
+                "Cross-Origin-Opener-Policy": "same-origin"
+              }
             }
           }
         }

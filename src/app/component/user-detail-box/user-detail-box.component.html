@@ -3,7 +3,7 @@
   class="flex mx-3 items-center bg-secondary space-x-4 p-3 h-[80px] mt-4 rounded-md"
 >
   <!-- user  logo -->
-  <div class="flex flex-col justify-center items-center">
+  <div class="flex flex-col items-center justify-center">
     <img
       class="w-10 h-10 rounded-full border-green-400 border-[2px]"
       [src]="
@@ -14,15 +14,19 @@
       crossorigin
     />
     <!-- name -->
-    <span class="text-white font-semibold">
+    <span class="font-semibold text-white">
       {{ owner.name }}
     </span>
   </div>
 
   <!-- subscribe -->
 
-  <div class="flex items-center md:text-lg text-sm">
-    <button (click)="subscribe()" [ngClass]="style.subscribe_btn">
+  <div class="flex items-center text-sm md:text-lg">
+    <button
+      (click)="subscribe()"
+      class="subscribe"
+      [ngClass]="style.subscribe_btn"
+    >
       Subscribe
     </button>
   </div>
@@ -33,7 +37,7 @@
     <button
       [disabled]="isLoading"
       (click)="like()"
-      class="items-center animate_btn flex space-x-2 bg-gray-600 p-2 rounded-md"
+      class="flex items-center p-2 space-x-2 bg-gray-600 rounded-md animate_btn"
     >
       <span *ngIf="!isLiked" class="material-symbols-outlined"> thumb_up </span>
 
@@ -50,6 +54,7 @@
       [disabled]="isLoading"
       (click)="unlike()"
       [ngClass]="style.reaction_btn"
+      class="dislike"
     >
       <span *ngIf="!isUnliked" class="material-symbols-outline">
         thumb_down
@@ -59,7 +64,7 @@
     </button>
 
     <!-- share -->
-    <button (click)="share()">
+    <button class="share_video" (click)="share()">
       <span [ngClass]="style.reaction_btn"> share </span>
     </button>
   </div>
