@@ -213,4 +213,20 @@ export class BookshowService {
 
     this.router.navigate(['/']);
   }
+
+  // delete show
+
+  async deleteShow(show: any) {
+    const { uid } = this.userAuth.currentUser;
+    //  check its booked or not
+    if (show?.users[uid]) {
+      this.notify.error('You have already booked this show');
+      return;
+    }
+    this.db.collection('shows').doc(show.id).delete();
+
+    this.notify.success('Show deleted successfully');
+
+    this.nativeWindow.location.reload();
+  }
 }

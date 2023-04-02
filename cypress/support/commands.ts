@@ -11,13 +11,12 @@ Cypress.Commands.add('loginToApp', (email, password) => {
   // check if login button is visible
   // if not then return
 
-
   // click on login button
 
   cy.get('.login_btn').wait(1500).click();
   // fill the form
-  cy.get('input[name=email]').type('demo@demo.com');
-  cy.get('input[name=password]').type('demodemo');
+  cy.get('input[name=email]').type(email);
+  cy.get('input[name=password]').type(password);
 
   // click on login button
   cy.get('.submit_btn').wait(1500).click();

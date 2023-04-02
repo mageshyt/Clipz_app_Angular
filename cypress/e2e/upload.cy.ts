@@ -13,9 +13,15 @@ describe('Upload Video', () => {
     // click on upload button
     cy.get('[routerlink="/upload"]').wait(1500).click();
 
-    cy.wait(25000);
+    cy.wait(15000);
     cy.get('.upload_video').wait(1500).selectFile('video.mp4', {
       force: true,
     });
+
+    cy.wait(4000);
+
+    // logout
+
+    cy.get('.logout-btn').click();
   });
 });

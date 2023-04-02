@@ -10,9 +10,18 @@
       [videoData]="game"
       (openModal)="openModal($event)"
       (onDelete)="onDelete($event)"
-      
     >
     </app-video-card>
+  </div>
+
+  <!-- no video -->
+
+  <div
+    *ngIf="gameDetails.length === 0"
+    class="flex mt-10 flex-col items-center justify-center flex-1 gap-5"
+  >
+    <h1 class="text-2xl font-bold text-gray-500">No video uploaded</h1>
+    <p class="text-gray-500">Upload your first video to get started</p>
   </div>
 </div>
 

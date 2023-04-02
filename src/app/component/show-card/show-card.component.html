@@ -1,6 +1,14 @@
 <div
-  class="bg-[#283046] overflow-hidden card_constainer p-2 py-4 mx-3 select-none justify-between flex flex-col md:w-[450px] w-[350px] rounded-md h-[480px] transform transition-all duration-200 hover:scale-105 cursor-pointer"
+  class="bg-[#283046] overflow-hidden relative card_constainer p-2 py-4 mx-3 select-none justify-between flex flex-col md:w-[450px] w-[350px] rounded-md h-[480px] transform transition-all duration-200 hover:scale-105"
 >
+  <!-- bin -->
+
+  <div
+    *ngIf="currentUserId === show.creator"
+    class="bg-black opacity-60 absolute delete_btn_show right-2 cursor-pointer top-5 rounded-full flex items-center justify-center p-2 h-[40px] w-[40px]"
+  >
+    <span class="material-symbols-outlined"> delete </span>
+  </div>
   <!-- banner image -->
 
   <div>
